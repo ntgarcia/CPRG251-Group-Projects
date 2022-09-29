@@ -72,7 +72,7 @@ public class Application {
 		ArrayList<String> list = new ArrayList<>();
 		Scanner fileData;
 		
-		File file = new File("C:\\Users\\Piriya\\Desktop\\SAIT\\Semester 2\\Object\\Assignment\\Assignment 1\\books.txt");
+		File file = new File("..//Assignment 1//res//books.txt");
 		fileData = new Scanner(file).useDelimiter(";|\\r\\n");
 	    
 		while (fileData.hasNext()) {
