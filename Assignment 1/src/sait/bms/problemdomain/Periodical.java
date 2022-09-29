@@ -1,6 +1,8 @@
 package sait.bms.problemdomain;
 
-public class Periodical {
+import java.awt.print.Book;
+
+public class Periodical extends Book {
 	String ISBN;
 	double callNumber;
 	int available;

@@ -1,3 +1,5 @@
+package sait.bms.manager;
+
 import java.io.*;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -9,11 +11,11 @@ public class Book {
 	int available;
 	int total;
 	String title;
-	
-	//No-arg constructor
+
+	// No-arg constructor
 	public Book() {
 	}
-	
+
 	public Book(String ISBN, String callNumber, int available, int total, String title) {
 		this.ISBN = ISBN;
 		this.callNumber = callNumber;
@@ -21,15 +23,11 @@ public class Book {
 		this.total = total;
 		this.title = title;
 	}
-	
-
-
 
 	@Override
 	public String toString() {
 		return "Book [ISBN=" + ISBN + ", callNumber=" + callNumber + ", available=" + available + ", total=" + total
 				+ ", title=" + title + "]";
 	}
-	
-	
+
 }

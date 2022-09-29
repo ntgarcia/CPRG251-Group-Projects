@@ -1,6 +1,8 @@
 package sait.bms.problemdomain;
 
-public class Cookbook {
+import java.awt.print.Book;
+
+public class Cookbook extends Book {
 	String ISBN;
 	double callNumber;
 	int available;
