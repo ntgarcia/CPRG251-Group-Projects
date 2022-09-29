@@ -30,7 +30,18 @@ public class Book {
 				+ ", title=" + title + "]";
 	}
 
-	
+	/*
+	 * CHECKOUT METHOD
+	 * ----------------
+	 * Implement a method that allows a patron to checkout a book. The user
+	 * patron will be prompted to enter the ISBN of a book. If the entered ISBN does
+	 * not match, the program will inform the patron with an error message. If the
+	 * ISBN matches, the program checks the book’s availability. If there is a book
+	 * available, the available count will be decremented and the books information
+	 * will be displayed. Otherwise, the user patron will be informed the book is
+	 * not available.
+	 */
+
 	public static void CheckOut() throws IOException {
 		ArrayList<String> list = createList();
 
@@ -72,6 +83,16 @@ public class Book {
 		}
 	}
 
+	/*
+	 * ARRAYLIST METHOD
+	 * ----------------
+	 * Implement a method that parses the supplied “books.txt” file into a single
+	 * array list. The array list will be able to contain all Book types (cookbooks,
+	 * children’s books, and paperbacks). Use the last digit of the ISBN to
+	 * determine what a valid type of book needs to be created (see Formatting for
+	 * more information).
+	 */
+
 	// Populate arraylist with file content
 	public static ArrayList<String> createList() throws IOException {
 		ArrayList<String> list = new ArrayList<>();
@@ -84,6 +105,59 @@ public class Book {
 			list.add(fileData.next());
 		}
 		return list;
+
+	}
+
+	/*
+	 * FINDBOOK METHOD
+	 * ----------------
+	 * Implement a method that prompts the user patron to enter a title, performs
+	 * a case-insensitive search of books that containing the inputted title, and
+	 * displays them.
+	 */
+
+	public static void FindBook() throws IOException {
+
+	}
+
+	/*
+	 * DISPLAYBOOK METHOD
+	 * ----------------
+	 * Implement a method that prompts the user for a type of book and displays
+	 * all books of that type. Down-casting is required to determine the type of
+	 * book is what the user specified.
+	 */
+
+	public static void DisplayBook() throws IOException {
+
+	}
+
+	/*
+	 * RANDOMLIST METHOD
+	 * ----------------
+	 * Implement a method that prompts a user to enter a number and the program
+	 * displays that number of random books. The books can be any type. The
+	 * Collections.shuffle method maybe used.
+	 */
+
+	public static void RandomList() throws IOException {
+
+		System.out.println("Enter number of books: ");
+
+		// shuffle array
+		Collections.shuffle();
+
+	}
+
+	/*
+	 * EXIT METHOD
+	 * ----------------
+	 * Implement and call a method, when the program exits, that takes the books
+	 * stored in the array list and persists them back to the “books.txt” file in
+	 * the proper format.
+	 */
+
+	public static void Exit() throws IOException {
 
 	}
 

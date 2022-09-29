@@ -27,6 +27,22 @@ public class Application {
 		if (input1 == 1) {
 			Book.CheckOut();
 		}
+
+		if (input1 == 2) {
+			Book.FindBook();
+		}
+
+		if (input1 == 3) {
+			Book.DisplayBook();
+		}
+
+		if (input1 == 4) {
+			Book.RandomList();
+		}
+
+		if (input1 == 5) {
+			Book.Exit();
+		}
 	}
 
 }
