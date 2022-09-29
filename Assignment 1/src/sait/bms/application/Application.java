@@ -2,13 +2,13 @@ package sait.bms.application;
 
 import java.io.FileNotFoundException;
 
-import manager.Book;
+import sait.bms.manager.BookManager;
 
-public class bookdriver {
+public class Application {
 
-	public static void main(String[] args)throws FileNotFoundException
-	{
-		new Book();
+	public static void main(String[] args) throws FileNotFoundException {
+
+		new BookManager();
 	}
 
 }
