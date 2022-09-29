@@ -39,7 +39,6 @@ public class BookManager {
 			} else if (lastDigit >= 8 && lastDigit <= 9) {
 				book = new Periodicals();
 			}
-			System.out.println(book);
 			books.add(book);
 		}
 		in.close();
