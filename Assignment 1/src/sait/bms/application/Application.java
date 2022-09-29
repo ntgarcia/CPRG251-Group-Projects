@@ -1,5 +1,14 @@
 package sait.bms.application;
 
-public class Application {
+import java.io.FileNotFoundException;
+
+import manager.Book;
+
+public class bookdriver {
+
+	public static void main(String[] args)throws FileNotFoundException
+	{
+		new Book();
+	}
 
 }
