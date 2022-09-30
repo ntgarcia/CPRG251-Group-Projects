@@ -63,7 +63,8 @@ public abstract class Book {
 
     @Override
     public String toString() {
-        return "Book [ISBN=" + isbn + ", callNumber=" + callNumber + ", available=" + available + ", total=" + total
-                + ", title=" + title + "]";
+        return "Book [ISBN=" + getIsbn() + ", callNumber=" + getCallNumber() + ", available=" + getAvailable()
+                + ", total=" + getTotal()
+                + ", title=" + getTitle() + "]";
     }
 }

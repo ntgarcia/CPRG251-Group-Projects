@@ -15,11 +15,26 @@ public class BookManager {
 
 		loadBooksFromFile();
 		System.out.println("Welcome in ABC Book Company: How May We Assist You?");
-		System.out.println("1. Checkout Book");
-		System.out.println("2. Find Books by Title");
-		System.out.println("3. Display Books by Type");
-		System.out.println("4. Produce Random Book List");
-		System.out.println("5. Save & Exit");
+		System.out.println("1     Checkout Book");
+		System.out.println("2     Find Books by Title");
+		System.out.println("3     Display Books by Type");
+		System.out.println("4     Produce Random Book List");
+		System.out.println("5     Save & Exit");
+
+		System.out.println("Enter Option: ");
+
+		Switch (option) {
+			case "1":
+				checkOut();
+			case "2":
+				findBooks();
+			case "3":
+				displayBooks();
+			case "4":
+				randomBooks();
+			case "5":
+				saveExit();
+		}
 	}
 
 	private void loadBooksFromFile() throws FileNotFoundException {
@@ -46,82 +61,160 @@ public class BookManager {
 
 	}
 
-	private double getAveragePay() {
-		double sum = 0;
-		for (Employee employee : employees) {
-			sum += employee.getPay();
+	private String checkOut() {
+		// get isbn
+
+		System.out.println("Enter ISBN of book: ");
+
+		// check isbn inside books
+		// if isbn does not exist, print error
+		if (books.contains(isbn_input)) {
+			// check availability
+			if (check_book.getAvailable() > 0) {
+				// update availability -1,
+				System.out.println("The book " + check_book.getTitle() + "has been checked out.");
+				System.out.println("It can be located using call number: " + check_book.getCallNumber());
+			} else {
+				// if not available print msg
+				System.out.println("The book is not available.");
+			}
+		} else {
+			// print error message
+			System.out.println("Error: ISBN does not exist.");
 		}
-		return sum / employees.size();
+
 	}
 
-	private Wage getHighestPaidWageEmployee() {
-		Wage wage = null;
-		double highestPay = 0;
+	private String findBooks() {
+		System.out.println("Enter title to search for: ");
+		// case sensitive
+		// use for loop to find each title
+		for () {
+			// should be a to string, since were using this for the next method too
+			System.out.println("Matching Books:");
+			System.out.println("ISBN: " + getIsbn());
+			System.out.println("Call Number: " + getCallNumber());
+			System.out.println("Available: " + getAvailable());
+			System.out.println("Total: " + getTotal());
+			System.out.println("Title: " + getTitle());
+			// check type for extra param print
+			if (book == Childrens_books) {
+				System.out.println("Authors: " + getAuthors());
+				System.out.println("Format: " + getFormat());
+			} else if (book == Cookbooks) {
+				
+			} else if (book == Paperbacks) {
 
-		for (int i = 0; i < employees.size(); i++) {
-			Employee employee = employees.get(i);
-			if (employee instanceof Wage) {
-				if (employee.getPay() > highestPay) {
-					highestPay = employee.getPay();
-					wage = (Wage) employee;
-				}
+			} else {
+				// periodicals
 			}
 		}
-		return wage;
 	}
 
-	private Salaried getLowestPaidSalariedEmployee() {
-		Salaried salaried = null;
-		double lowestPay = 0;
-		boolean first = true;
-		for (int i = 0; i < employees.size(); i++) {
-			Employee employee = employees.get(i);
-			if (employee instanceof Salaried) {
-				if (first) {
-					lowestPay = employee.getPay();
-					first = false;
-				}
-				if (employee.getPay() <= lowestPay) {
-					lowestPay = employee.getPay();
-					salaried = (Salaried) employee;
-				}
-			}
+	private String dispayBooks() {
+		System.out.println("#     Type");
+		System.out.println("1     Children's Books");
+		System.out.println("2     Cookbooks");
+		System.out.println("3     Paperbacks");
+		System.out.println("4     Periodicals");
+
+		System.out.println("Enter type of book: ");
+		// need downcasting
+
+		if (type == 4) {
+			System.out.println(
+					"Enter a frequency (D for Daily, W for Weekly, M for Monthly, B for Biweekly, or Q for Quarterly): ");
+		} else {
+
 		}
-		return salaried;
+
 	}
 
-	private double getEmployeePercentage(String type) {
-		int count = 0;
-
-		switch (type) {
-			case "PartTime":
-				for (Employee emp : employees) {
-					if (emp instanceof PartTime) {
-						count++;
-					}
-
-				}
-				break;
-
-			case "Wage":
-				for (Employee emp : employees) {
-					if (emp instanceof Wage) {
-						count++;
-					}
-
-				}
-				break;
-
-			case "Salaried":
-				for (Employee emp : employees) {
-					if (emp instanceof Salaried) {
-						count++;
-					}
-
-				}
-				break;
+	private String displayBooks() {
+		System.out.println("Enter number of books: ");
+		// shuffle list, then pick first n number
+		Collections.shuffle(books);
+		// while loop: make counter equal i. while counter i not equal to zero, print a book, and then --
+		while () {
+			
 		}
-		return 100.0 * count / employees.size();
 	}
+
+	private String saveExit() {
+		// save changes to .txt?
+		System.out.println("Goodbye");
+	}
+
+	/*
+	 * private Wage getHighestPaidWageEmployee() {
+	 * Wage wage = null;
+	 * double highestPay = 0;
+	 * 
+	 * for (int i = 0; i < employees.size(); i++) {
+	 * Employee employee = employees.get(i);
+	 * if (employee instanceof Wage) {
+	 * if (employee.getPay() > highestPay) {
+	 * highestPay = employee.getPay();
+	 * wage = (Wage) employee;
+	 * }
+	 * }
+	 * }
+	 * return wage;
+	 * }
+	 * 
+	 * private Salaried getLowestPaidSalariedEmployee() {
+	 * Salaried salaried = null;
+	 * double lowestPay = 0;
+	 * boolean first = true;
+	 * for (int i = 0; i < employees.size(); i++) {
+	 * Employee employee = employees.get(i);
+	 * if (employee instanceof Salaried) {
+	 * if (first) {
+	 * lowestPay = employee.getPay();
+	 * first = false;
+	 * }
+	 * if (employee.getPay() <= lowestPay) {
+	 * lowestPay = employee.getPay();
+	 * salaried = (Salaried) employee;
+	 * }
+	 * }
+	 * }
+	 * return salaried;
+	 * }
+	 * 
+	 * private double getEmployeePercentage(String type) {
+	 * int count = 0;
+	 * 
+	 * switch (type) {
+	 * case "PartTime":
+	 * for (Employee emp : employees) {
+	 * if (emp instanceof PartTime) {
+	 * count++;
+	 * }
+	 * 
+	 * }
+	 * break;
+	 * 
+	 * case "Wage":
+	 * for (Employee emp : employees) {
+	 * if (emp instanceof Wage) {
+	 * count++;
+	 * }
+	 * 
+	 * }
+	 * break;
+	 * 
+	 * case "Salaried":
+	 * for (Employee emp : employees) {
+	 * if (emp instanceof Salaried) {
+	 * count++;
+	 * }
+	 * 
+	 * }
+	 * break;
+	 * }
+	 * return 100.0 * count / employees.size();
+	 * }
+	 */
 
 }
