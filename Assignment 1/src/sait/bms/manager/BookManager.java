@@ -29,15 +29,16 @@ public class BookManager {
 			String line = in.nextLine();
 			String[] fields = line.split(":");
 			int lastDigit = Integer.parseInt(fields[12].substring(0, 1));
-			BookManager book = null;
-			if (lastDigit >= 0 && lastDigit <= 1) {
-				book = new Childrens_books();
-			} else if (lastDigit >= 5 && lastDigit <= 7) {
-				book = new Cookbooks();
-			} else if (lastDigit >= 8 && lastDigit <= 9) {
-				book = new Paperbacks();
-			} else if (lastDigit >= 8 && lastDigit <= 9) {
-				book = new Periodicals();
+			Book book = null;
+			if (lastDigit == 0 || lastDigit == 1) {
+				book = new Childrens_books(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6]);
+			} else if (lastDigit == 2 || lastDigit == 3) {
+				book = new Cookbooks(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5]);
+			} else if (lastDigit == 4 || lastDigit == 7) {
+				book = new Paperbacks(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6],
+						fields[7]);
+			} else if (lastDigit == 8 || lastDigit == 9) {
+				book = new Periodicals(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5]);
 			}
 			books.add(book);
 		}

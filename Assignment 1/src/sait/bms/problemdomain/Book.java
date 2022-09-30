@@ -1,32 +1,69 @@
 package sait.bms.problemdomain;
 
-import java.io.*;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.*;
+public abstract class Book {
 
-public class Book {
-    String ISBN;
-    String callNumber;
-    int available;
-    int total;
-    String title;
+    // attributes
+    private String isbn;
+    private String callNumber;
+    private int available;
+    private int total;
+    private String title;
 
     // No-arg constructor
     public Book() {
     }
 
-    public Book(String ISBN, String callNumber, int available, int total, String title) {
-        this.ISBN = ISBN;
+    public Book(String isbn, String callNumber, int available, int total, String title) {
+        this.isbn = isbn;
         this.callNumber = callNumber;
         this.available = available;
         this.total = total;
         this.title = title;
     }
 
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getCallNumber() {
+        return callNumber;
+    }
+
+    public void setCallNumber(String callNumber) {
+        this.callNumber = callNumber;
+    }
+
+    public int getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(int available) {
+        this.available = available;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public String toString() {
-        return "Book [ISBN=" + ISBN + ", callNumber=" + callNumber + ", available=" + available + ", total=" + total
+        return "Book [ISBN=" + isbn + ", callNumber=" + callNumber + ", available=" + available + ", total=" + total
                 + ", title=" + title + "]";
     }
 }
