@@ -57,12 +57,19 @@ public class BookManager extends Book {
         System.out.println("Enter Option: ");
         int userChoice = in.nextInt();
         if (userChoice == 1) {
-            CheckOut();
+            checkOut();
+        } else if (userChoice == 2) {
+            findBookByTitle();
+        } else if (userChoice == 3) {
+            displayBookByType();
+        } else if (userChoice == 4) {
+            produceRandomBookList();
+        } else {
+            saveAndExit();
         }
-        
 	}
 	
-	public void CheckOut() throws IOException{
+	public void checkOut() throws IOException{
 	    System.out.println("Please enter the ISBN number: ");
 	    String userISBN = in.next();
 	    for (int i=0; i < books.size(); i++) {
