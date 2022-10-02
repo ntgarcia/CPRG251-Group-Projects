@@ -3,7 +3,6 @@ package sait.bms.manager;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.security.acl.LastOwnerException;
 import java.util.*;
 
 import sait.bms.problemdomain.*;
@@ -55,19 +54,21 @@ public class BookManager extends Book {
         System.out.println("5     Save & Exit");
 
         System.out.println("Enter Option: ");
-        int userChoice = in.nextInt();
-        if (userChoice == 1) {
-            checkOut();
-        } else if (userChoice == 2) {
-            findBookByTitle();
-        } else if (userChoice == 3) {
-            displayBookByType();
-        } else if (userChoice == 4) {
-            produceRandomBookList();
-        } else {
-            saveAndExit();
-        }
+		switch (in.nextInt()) {
+			case 1:
+				checkOut();
+			case 2:
+				findBookByTitle();
+			case 3:
+				displayBookByType();
+			case 4:
+				produceRandomBookList();
+			case 5:
+				saveAndExit();
+		}
+        
 	}
+
 	
 	public void checkOut() throws IOException{
 	    System.out.println("Please enter the ISBN number: ");
@@ -80,20 +81,83 @@ public class BookManager extends Book {
 	        }
 	    }
 	}
+
+	private void displayBookByType() throws IOException{
+		System.out.println("#     Type");
+		System.out.println("1     Children's Books");
+		System.out.println("2     Cookbooks");
+		System.out.println("3     Paperbacks");
+		System.out.println("4     Periodicals");
+
+		System.out.println("Enter type of book: ");
+		
+		switch (in.nextInt()) {
+			// children books
+			case 1:
+				System.out.println("Enter a format (P for Picture book, E for Early Readers, C for Chapter book):");
+				switch (in.next().charAt(0)) {
+					case 'P':
+
+					case 'E':
+
+					case 'C':
+
+				}
+				
+			// cookbooks
+			case 2:
+				System.out.println("Enter a diet (D for Diabetic, V for Vegetarian, G for Gluten-free, I for International, or N for None):");
+				switch (in.next().charAt(0)) {
+					case 'D':
+
+					case 'V':
+
+					case 'G':
+
+					case 'I':
+
+					case 'N':
+
+				}
+
+			// paperbacks
+			case 3:
+				System.out.println("Enter a genre (A for Adventure, D for Drama, E for Education, C for Classic, F for Fantasy, or S for Science Fiction):");
+				switch (in.next().charAt(0)) {
+					case 'A':
+
+					case 'D':
+
+					case 'E':
+
+					case 'C':
+
+					case 'F':
+					
+					case 'S':
+
+				}
+				
+			// periodicals
+			case 4:
+				System.out.println("Enter a frequency (D for Daily, W for Weekly, M for Monthly, B for Biweekly, or Q for Quarterly):");
+				switch (in.next().charAt(0)) {
+					case 'D':
+
+					case 'W':
+
+					case 'M':
+
+					case 'B':
+
+					case 'Q':
+				}
+
+		}
+	}
+
+
 }
-//		Switch (option) {
-//			case "1":
-//				checkOut();
-//			case "2":
-//				findBooks();
-//			case "3":
-//				displayBooks();
-//			case "4":
-//				randomBooks();
-//			case "5":
-//				saveExit();
-//		}
-//	}
 
 
 
