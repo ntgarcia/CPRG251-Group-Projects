@@ -9,7 +9,6 @@ public abstract class Book {
     private int total;
     private String title;
 
-    // No-arg constructor
     public Book() {
     }
 
@@ -61,10 +60,5 @@ public abstract class Book {
         this.title = title;
     }
 
-    @Override
-    public String toString() {
-        return "Book [ISBN=" + getIsbn() + ", callNumber=" + getCallNumber() + ", available=" + getAvailable()
-                + ", total=" + getTotal()
-                + ", title=" + getTitle() + "]";
-    }
+ 
 }

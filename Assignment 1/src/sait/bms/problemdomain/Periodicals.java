@@ -4,8 +4,17 @@ public class Periodicals extends Book {
 
     private String frequency;
 
-    public Periodicals(String isbn, String callNumber, String available, String total, String title, String frequency) {
+    public Periodicals(String isbn, String callNumber, int available, int total, String title, String frequency) {
+        super(isbn, callNumber, available, total, title);
+        this.frequency = frequency;
+    }
 
+    @Override
+    public String toString() {
+        return "Periodicals [getFrequency()=" + getFrequency() + ", getIsbn()=" + getIsbn() + ", getCallNumber()="
+                + getCallNumber() + ", getAvailable()=" + getAvailable() + ", getTotal()=" + getTotal()
+                + ", getTitle()=" + getTitle() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+                + ", toString()=" + super.toString() + "]";
     }
 
     public String getFrequency() {

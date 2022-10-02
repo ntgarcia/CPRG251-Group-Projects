@@ -5,9 +5,11 @@ public class Childrens_books extends Book {
 	private String authors;
 	private String format;
 
-	public Childrens_books(String isbn, String callNumber, String available, String total, String title, String authors,
+	public Childrens_books(String isbn, String callNumber, int available, int total, String title, String authors,
 			String format) {
-
+        super(isbn, callNumber, available, total, title);
+        this.authors = authors;
+        this.format = format;
 	}
 
 	public String getAuths() {
@@ -25,4 +27,13 @@ public class Childrens_books extends Book {
 	public void setFormat(String format) {
 		this.format = format;
 	}
+
+    @Override
+    public String toString() {
+        return "Childrens_books [getAuths()=" + getAuths() + ", getFormat()=" + getFormat() + ", getIsbn()=" + getIsbn()
+                + ", getCallNumber()=" + getCallNumber() + ", getAvailable()=" + getAvailable() + ", getTotal()="
+                + getTotal() + ", getTitle()=" + getTitle() + "]";
+    }
+	
+	
 }
