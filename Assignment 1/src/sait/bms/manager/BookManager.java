@@ -27,7 +27,7 @@ public class BookManager extends Book {
 	        while (in.hasNext()) {
 	            String line = in.nextLine();
 	            String[] fields = line.split(";");
-	            int lastDigit = Integer.parseInt(fields[0].substring(0, 1));
+	            int lastDigit = Integer.parseInt(fields[0].substring(12));
 	            Book book = null;
 	            if (lastDigit == 0 || lastDigit == 1) {
 	                book = new Childrens_books(fields[0], fields[1], Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), fields[4], fields[5], fields[6]);
@@ -38,12 +38,12 @@ public class BookManager extends Book {
 	            } else if (lastDigit == 8 || lastDigit == 9) {
 	                book = new Periodicals(fields[0], fields[1], Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), fields[4],fields[5]);
 	            }
-	        System.out.println(book);
+	        //System.out.println(book);
 	        books.add(book);
 	        }
 	        in.close();
-
 	    }
+	   
 	public void printMenu() throws IOException {
 
         System.out.println("Welcome in ABC Book Company: How May We Assist You?");
@@ -53,33 +53,36 @@ public class BookManager extends Book {
         System.out.println("4     Produce Random Book List");
         System.out.println("5     Save & Exit");
 
-        System.out.println("Enter Option: ");
+        System.out.print("\r\nEnter Option: ");
 		switch (in.nextInt()) {
 			case 1:
 				checkOut();
 			case 2:
-				findBookByTitle();
+				//findBookByTitle();
 			case 3:
 				displayBookByType();
 			case 4:
 				produceRandomBookList();
 			case 5:
-				saveAndExit();
+				//saveAndExit();
 		}
         
 	}
 
 	
 	public void checkOut() throws IOException{
-	    System.out.println("Please enter the ISBN number: ");
+	    System.out.print("Please enter the ISBN number: ");
 	    String userISBN = in.next();
 	    for (int i=0; i < books.size(); i++) {
 	        Book book = books.get(i);
 	        if (userISBN.equals(book.getIsbn())) {
-	            System.out.println(book.getTitle());
+	            System.out.println("\r\nThe book \"" + book.getTitle() + "\" has been checked out");
+	            System.out.println("It can be located using a call number: " + book.getCallNumber() + "\r\n");
 	            
+	            //need to deduct the availability of the book and save the new information to the file
 	        }
 	    }
+	    printMenu();
 	}
 
 	private void displayBookByType() throws IOException{
@@ -155,8 +158,33 @@ public class BookManager extends Book {
 
 		}
 	}
-
-
+	
+	private void produceRandomBookList() throws IOException {
+	    System.out.print("Enter number of books: ");
+	    // shuffle list, then pick first n number
+	    int numberOfBooks = in.nextInt();
+	    Collections.shuffle(books);
+	    System.out.println("\r\nRandom books");
+	    
+	    // while loop: make counter equal i. while counter i not equal to zero, print a book, and then --  
+        while (numberOfBooks != 0) {
+            if (books.get(numberOfBooks) instanceof Cookbooks) {
+                System.out.println(books.get(numberOfBooks));
+                System.out.println();
+            } else if (books.get(numberOfBooks) instanceof Childrens_books) {
+                System.out.println(books.get(numberOfBooks));
+                System.out.println();
+	        } else if (books.get(numberOfBooks) instanceof Paperbacks) {
+                System.out.println(books.get(numberOfBooks));
+                System.out.println();
+	        } else if (books.get(numberOfBooks) instanceof Periodicals) {
+                System.out.println(books.get(numberOfBooks));
+                System.out.println();
+            }
+            numberOfBooks--;
+        }
+        printMenu();   
+	}
 }
 
 
@@ -232,15 +260,6 @@ public class BookManager extends Book {
 //
 //	}
 //
-//	private String displayBooks() {
-//		System.out.println("Enter number of books: ");
-//		// shuffle list, then pick first n number
-//		Collections.shuffle(books);
-//		// while loop: make counter equal i. while counter i not equal to zero, print a book, and then --
-//		while () {
-//			
-//		}
-//	}
 //
 //	private String saveExit() {
 //		// save changes to .txt?

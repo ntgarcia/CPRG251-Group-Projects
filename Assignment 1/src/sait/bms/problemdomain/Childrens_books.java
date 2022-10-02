@@ -12,7 +12,7 @@ public class Childrens_books extends Book {
         this.format = format;
 	}
 
-	public String getAuths() {
+	public String getAuthors() {
 		return authors;
 	}
 
@@ -30,9 +30,11 @@ public class Childrens_books extends Book {
 
     @Override
     public String toString() {
-        return "Childrens_books [getAuths()=" + getAuths() + ", getFormat()=" + getFormat() + ", getIsbn()=" + getIsbn()
-                + ", getCallNumber()=" + getCallNumber() + ", getAvailable()=" + getAvailable() + ", getTotal()="
-                + getTotal() + ", getTitle()=" + getTitle() + "]";
+//        return "Childrens_books [getAuthors()=" + getAuthors() + ", getFormat()=" + getFormat() + ", getIsbn()=" + getIsbn()
+//                + ", getCallNumber()=" + getCallNumber() + ", getAvailable()=" + getAvailable() + ", getTotal()="
+//                + getTotal() + ", getTitle()=" + getTitle() + "]";
+          return "ISBN: " + getIsbn() + "\r\n" + "Call Number: " + getCallNumber() + "\r\n" + "Available: " + getAvailable() + "\r\n" + "Total: " + getTotal()
+          + "\r\n" + "Title: " + getTitle() + "\r\n" + "Authors: " + getAuthors() + "\r\n" + "Format: " + getFormat();
     }
 	
 	
