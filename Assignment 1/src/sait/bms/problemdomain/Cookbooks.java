@@ -4,13 +4,13 @@ package sait.bms.problemdomain;
 public class Cookbooks extends Book {
 
     private String publisher;
-    private static String diet;
+    private String diet;
 
     public Cookbooks(String isbn, String callNumber, int available, int total, String title, String publisher,
             String diet) {
         super(isbn, callNumber, available, total, title);
         this.publisher = publisher;
-        Cookbooks.diet = diet;
+        this.diet = diet;
 
     }
 
@@ -22,12 +22,12 @@ public class Cookbooks extends Book {
         this.publisher = publisher;
     }
 
-    public static String getDiet() {
+    public String getDiet() {
         return diet;
     }
 
     public void setDiet(String diet) {
-        Cookbooks.diet = diet;
+        this.diet = diet;
     }
 
     @Override

@@ -139,56 +139,61 @@ public class BookManager extends Book {
 			// children books
 			case 1:
 				System.out.println("Enter a format (P for Picture book, E for Early Readers, C for Chapter book):");
-				for (int i = 0; i < books.size(); i++) {
-					Book book = books.get(i);
-
-					if (book instanceof Childrens_books) {
-					    System.out.println(books.get(i));
-						if (Childrens_books.getFormat().equals(in.nextLine())) {
-							System.out.println(books.get(i));
-						}
+				String inFormat = in.next().toUpperCase();
+				for (Book child : books) {
+					if (child instanceof Childrens_books) {
+					    if (((Childrens_books) child).getFormat().equals(inFormat)) {
+					        System.out.println(child);
+					    }
 					}
-				}
+				} 
+				printMenu();
+				break;
 
 				// cookbooks
 			case 2:
 				System.out.println(
 						"Enter a diet (D for Diabetic, V for Vegetarian, G for Gluten-free, I for International, or N for None):");
-				for (int i = 0; i < books.size(); i++) {
-					Book book = books.get(i);
-					if (book instanceof Cookbooks) {
-						if (Cookbooks.getDiet().equals(in.nextLine())) {
-							System.out.println(books.get(i));
-						}
+                String inDiet = in.next().toUpperCase();
+				for (Book cook : books) {
+					if (cook instanceof Cookbooks) {
+					    if (((Cookbooks) cook).getDiet().equals(inDiet)) {
+					        System.out.println(cook);
+					    }
 					}
 				}
+				printMenu();
+				break;
 
 				// paperbacks
 			case 3:
 				System.out.println(
 						"Enter a genre (A for Adventure, D for Drama, E for Education, C for Classic, F for Fantasy, or S for Science Fiction):");
-				for (int i = 0; i < books.size(); i++) {
-					Book book = books.get(i);
-					if (book instanceof Paperbacks) {
-						if (Paperbacks.getGenre().equals(in.nextLine())) {
-							System.out.println(books.get(i));
-						}
-					}
-				}
+                String inGenre = in.next().toUpperCase();
+                for (Book paper : books) {
+                    if (paper instanceof Paperbacks) {
+                        if (((Paperbacks) paper).getGenre().equals(inGenre)) {
+                            System.out.println(paper);
+                        }
+                    }
+                }
+                printMenu();
+                break;
 
 				// periodicals
 			case 4:
 				System.out.println(
 						"Enter a frequency (D for Daily, W for Weekly, M for Monthly, B for Biweekly, or Q for Quarterly):");
-				for (int i = 0; i < books.size(); i++) {
-					Book book = books.get(i);
-					if (book instanceof Periodicals) {
-						if (Periodicals.getFrequency().equals(in.nextLine())) {
-							System.out.println(books.get(i));
-						}
-					}
-				}
-
+                String inFrequency = in.next().toUpperCase();
+                for (Book period : books) {
+                    if (period instanceof Periodicals) {
+                        if (((Periodicals) period).getFrequency().equals(inFrequency)) {
+                            System.out.println(period);
+                        }
+                    }
+                }
+                printMenu();
+                break;
 		}
 	}
 
