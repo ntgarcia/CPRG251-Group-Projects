@@ -58,7 +58,7 @@ public class BookManager extends Book {
 			case 1:
 				checkOut();
 			case 2:
-				//findBookByTitle();
+				findBookByTitle();
 			case 3:
 				displayBookByType();
 			case 4:
@@ -70,18 +70,57 @@ public class BookManager extends Book {
 	}
 
 	
-	public void checkOut() throws IOException{
+	private void checkOut() throws IOException{
+	    int count = 0;
 	    System.out.print("Please enter the ISBN number: ");
 	    String userISBN = in.next();
 	    for (int i=0; i < books.size(); i++) {
 	        Book book = books.get(i);
-	        if (userISBN.equals(book.getIsbn())) {
+	        if (userISBN.equals(book.getIsbn()) && book.getAvailable() > 0) {
 	            System.out.println("\r\nThe book \"" + book.getTitle() + "\" has been checked out");
 	            System.out.println("It can be located using a call number: " + book.getCallNumber() + "\r\n");
-	            
-	            //need to deduct the availability of the book and save the new information to the file
-	        }
+	            book.setAvailable(book.getAvailable()-1);
+	            count++;
+            }
+	        if (userISBN.equals(book.getIsbn()) && book.getAvailable() == 0) {
+                System.out.println("\r\nThe book is not in inventory.\r\n");
+                count++;
+            }
 	    }
+	    // The if statement is used to display an error message when 
+	    // the ISBN couldn't be matched and count remains 0
+	    if (count == 0) {
+            System.out.println("\r\nThe provided ISBN doesn't match any book in the system.\r\n");
+        }
+	    printMenu();
+	}
+	
+	private void findBookByTitle() throws IOException {
+	    int count = 0;
+	    System.out.print("Enter title to search for: ");
+	    String title = in.next();
+	    System.out.println("Matching books");
+	    for (int i = 0; i < books.size(); i++) {
+            Book book = books.get(i);
+            if (book.getTitle().toLowerCase().contains(title.toLowerCase())) {
+                if (book instanceof Cookbooks) {
+                    System.out.println(books.get(i));
+                    count++;
+                } else if (book instanceof Childrens_books) {
+                    System.out.println(books.get(i));
+                    count++;
+                } else if (book instanceof Paperbacks) {
+                    System.out.println(books.get(i));
+                    count++;
+                } else if (book instanceof Periodicals) {
+                    System.out.println(books.get(i));
+                    count++;
+                }
+            }
+	    }
+	    if (count == 0) {
+            System.out.println("\r\nThere is no matching book for this title.\r\n");
+        }
 	    printMenu();
 	}
 
@@ -170,16 +209,12 @@ public class BookManager extends Book {
         while (numberOfBooks != 0) {
             if (books.get(numberOfBooks) instanceof Cookbooks) {
                 System.out.println(books.get(numberOfBooks));
-                System.out.println();
             } else if (books.get(numberOfBooks) instanceof Childrens_books) {
                 System.out.println(books.get(numberOfBooks));
-                System.out.println();
 	        } else if (books.get(numberOfBooks) instanceof Paperbacks) {
                 System.out.println(books.get(numberOfBooks));
-                System.out.println();
 	        } else if (books.get(numberOfBooks) instanceof Periodicals) {
                 System.out.println(books.get(numberOfBooks));
-                System.out.println();
             }
             numberOfBooks--;
         }

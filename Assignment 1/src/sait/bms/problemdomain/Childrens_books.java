@@ -16,7 +16,7 @@ public class Childrens_books extends Book {
 		return authors;
 	}
 
-	public void setAuths(String auths) {
+	public void setAuthors(String auths) {
 		this.authors = auths;
 	}
 
@@ -30,11 +30,11 @@ public class Childrens_books extends Book {
 
     @Override
     public String toString() {
-//        return "Childrens_books [getAuthors()=" + getAuthors() + ", getFormat()=" + getFormat() + ", getIsbn()=" + getIsbn()
-//                + ", getCallNumber()=" + getCallNumber() + ", getAvailable()=" + getAvailable() + ", getTotal()="
-//                + getTotal() + ", getTitle()=" + getTitle() + "]";
-          return "ISBN: " + getIsbn() + "\r\n" + "Call Number: " + getCallNumber() + "\r\n" + "Available: " + getAvailable() + "\r\n" + "Total: " + getTotal()
-          + "\r\n" + "Title: " + getTitle() + "\r\n" + "Authors: " + getAuthors() + "\r\n" + "Format: " + getFormat();
+//        return "ISBN: " + getIsbn() + "\r\n" + "Call Number: " + getCallNumber() + "\r\n" + "Available: " + getAvailable() + "\r\n" + "Total: " + getTotal()
+//        + "\r\n" + "Title: " + getTitle() + "\r\n" + "Authors: " + getAuthors() + "\r\n" + "Format: " + getFormat() + "\r\n";
+          return String.format("ISBN:%25s%nCall Number:%16s%nAvailable:%7d%nTotal:%20d%nTitle:%20s%nAuthors:%20s%nFormat%20s%n", 
+                  getIsbn(), getCallNumber(),getAvailable(),getTotal(),getTitle(),getAuthors(),getFormat());
+
     }
 	
 	

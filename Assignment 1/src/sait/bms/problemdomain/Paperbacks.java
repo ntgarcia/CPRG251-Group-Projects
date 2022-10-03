@@ -16,12 +16,10 @@ public class Paperbacks extends Book {
 
     @Override
     public String toString() {
-//        return "Paperbacks [getAuthors()=" + getAuthors() + ", getYear()=" + getYear() + ", getGenre()=" + getGenre()
-//                + ", getIsbn()=" + getIsbn() + ", getCallNumber()=" + getCallNumber() + ", getAvailable()="
-//                + getAvailable() + ", getTotal()=" + getTotal() + ", getTitle()=" + getTitle() + ", getClass()="
-//                + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-          return "ISBN: " + getIsbn() + "\r\n" + "Call Number: " + getCallNumber() + "\r\n" + "Available: " + getAvailable() + "\r\n" + "Total: " + getTotal()
-          + "\r\n" + "Title: " + getTitle() + "\r\n" + "Authors: " + getAuthors() + "\r\n" + "Year: " + getYear() + "\r\n" + "Genre: " + getGenre();
+//          return "ISBN: " + getIsbn() + "\r\n" + "Call Number: " + getCallNumber() + "\r\n" + "Available: " + getAvailable() + "\r\n" + "Total: " + getTotal()
+//          + "\r\n" + "Title: " + getTitle() + "\r\n" + "Authors: " + getAuthors() + "\r\n" + "Year: " + getYear() + "\r\n" + "Genre: " + getGenre() + "\r\n";
+        return String.format("ISBN:%25s%nCall Number:%16s%nAvailable:%7d%nTotal:%20d%nTitle:%20s%nAuthors:%20s%nYear%20d%nGenre%20s%n", 
+                getIsbn(), getCallNumber(),getAvailable(),getTotal(),getTitle(),getAuthors(),getYear(),getGenre());
     }
 
     public String getAuthors() {

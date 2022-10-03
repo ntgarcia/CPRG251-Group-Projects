@@ -31,12 +31,10 @@ public class Cookbooks extends Book {
     }
     @Override
     public String toString() {
-//        return "Cookbooks [getPublisher()=" + getPublisher() + ", getDiet()=" + getDiet() + ", getIsbn()=" + getIsbn()
-//                + ", getCallNumber()=" + getCallNumber() + ", getAvailable()=" + getAvailable() + ", getTotal()="
-//                + getTotal() + ", getTitle()=" + getTitle() + ", getClass()=" + getClass() + ", hashCode()="
-//                + hashCode() + ", toString()=" + super.toString() + "]";
-          return "ISBN: " + getIsbn() + "\r\n" + "Call Number: " + getCallNumber() + "\r\n" + "Available: " + getAvailable() + "\r\n" + "Total: " + getTotal()
-          + "\r\n" + "Title: " + getTitle() + "\r\n" + "Publisher: " + getPublisher() + "\r\n" + "Diet: " + getDiet();
+//          return "ISBN: " + getIsbn() + "\r\n" + "Call Number: " + getCallNumber() + "\r\n" + "Available: " + getAvailable() + "\r\n" + "Total: " + getTotal()
+//          + "\r\n" + "Title: " + getTitle() + "\r\n" + "Publisher: " + getPublisher() + "\r\n" + "Diet: " + getDiet() + "\r\n";
+        return String.format("ISBN:%25s%nCall Number:%16s%nAvailable:%7d%nTotal:%20d%nTitle:%20s%nPublisher:%20s%nDiet%20s%n", 
+                getIsbn(), getCallNumber(),getAvailable(),getTotal(),getTitle(),getPublisher(),getDiet());
     }
 
 }
