@@ -3,12 +3,23 @@ package sait.bms.problemdomain;
 public class Paperbacks extends Book {
 
     private String authors;
-    private String year;
-    private String genre;
+    private int year;
+    private static String genre;
 
-    public Paperbacks(String isbn, String callNumber, String available, String total, String title, String authors,
-            String year, String genre) {
+    public Paperbacks(String isbn, String callNumber, int available, int total, String title, String authors,
+            int year, String genre) {
+        super(isbn, callNumber, available, total, title);
+        this.authors = authors;
+        this.year = year;
+        Paperbacks.genre = genre;
+    }
 
+    @Override
+    public String toString() {
+//          return "ISBN: " + getIsbn() + "\r\n" + "Call Number: " + getCallNumber() + "\r\n" + "Available: " + getAvailable() + "\r\n" + "Total: " + getTotal()
+//          + "\r\n" + "Title: " + getTitle() + "\r\n" + "Authors: " + getAuthors() + "\r\n" + "Year: " + getYear() + "\r\n" + "Genre: " + getGenre() + "\r\n";
+        return String.format("ISBN:%25s%nCall Number:%16s%nAvailable:%7d%nTotal:%20d%nTitle:%20s%nAuthors:%20s%nYear%20d%nGenre%20s%n", 
+                getIsbn(), getCallNumber(),getAvailable(),getTotal(),getTitle(),getAuthors(),getYear(),getGenre());
     }
 
     public String getAuthors() {
@@ -19,20 +30,20 @@ public class Paperbacks extends Book {
         this.authors = authors;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
-    public String getGenre() {
+    public static String getGenre() {
         return genre;
     }
 
     public void setGenre(String genre) {
-        this.genre = genre;
+        Paperbacks.genre = genre;
     }
 
 }
