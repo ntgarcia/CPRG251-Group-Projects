@@ -110,16 +110,16 @@ public class BookManager extends Book {
 			Book book = books.get(i);
 			if (book.getTitle().toLowerCase().contains(title.toLowerCase())) {
 				if (book instanceof Cookbooks) {
-					System.out.println(books.get(i));
+					System.out.println(((Cookbooks) book).printCook());
 					count++;
 				} else if (book instanceof Childrens_books) {
-					System.out.println(books.get(i));
+					System.out.println(((Childrens_books) book).printChild());
 					count++;
 				} else if (book instanceof Paperbacks) {
-					System.out.println(books.get(i));
+					System.out.println(((Paperbacks) book).printPaper());
 					count++;
 				} else if (book instanceof Periodicals) {
-					System.out.println(books.get(i));
+					System.out.println(((Periodicals) book).printPeriod());
 					count++;
 				}
 			}
