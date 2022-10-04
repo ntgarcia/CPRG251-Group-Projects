@@ -2,7 +2,11 @@ package sait.bms.manager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Writer;
 import java.util.*;
 
 import sait.bms.problemdomain.*;
@@ -67,7 +71,7 @@ public class BookManager extends Book {
 			case 4:
 				produceRandomBookList();
 			case 5:
-				// saveAndExit();
+				saveAndExit();
 		}
 
 	}
@@ -142,58 +146,58 @@ public class BookManager extends Book {
 				String inFormat = in.next().toUpperCase();
 				for (Book child : books) {
 					if (child instanceof Childrens_books) {
-					    if (((Childrens_books) child).getFormat().equals(inFormat)) {
-					        System.out.println(child);
-					    }
-					}
-				} 
-				printMenu();
-				break;
-
-				// cookbooks
-			case 2:
-				System.out.println(
-						"Enter a diet (D for Diabetic, V for Vegetarian, G for Gluten-free, I for International, or N for None):");
-                String inDiet = in.next().toUpperCase();
-				for (Book cook : books) {
-					if (cook instanceof Cookbooks) {
-					    if (((Cookbooks) cook).getDiet().equals(inDiet)) {
-					        System.out.println(cook);
-					    }
+						if (((Childrens_books) child).getFormat().equals(inFormat)) {
+							System.out.println(((Childrens_books) child).printChild());
+						}
 					}
 				}
 				printMenu();
 				break;
 
-				// paperbacks
+			// cookbooks
+			case 2:
+				System.out.println(
+						"Enter a diet (D for Diabetic, V for Vegetarian, G for Gluten-free, I for International, or N for None):");
+				String inDiet = in.next().toUpperCase();
+				for (Book cook : books) {
+					if (cook instanceof Cookbooks) {
+						if (((Cookbooks) cook).getDiet().equals(inDiet)) {
+							System.out.println(((Cookbooks) cook).printCook());
+						}
+					}
+				}
+				printMenu();
+				break;
+
+			// paperbacks
 			case 3:
 				System.out.println(
 						"Enter a genre (A for Adventure, D for Drama, E for Education, C for Classic, F for Fantasy, or S for Science Fiction):");
-                String inGenre = in.next().toUpperCase();
-                for (Book paper : books) {
-                    if (paper instanceof Paperbacks) {
-                        if (((Paperbacks) paper).getGenre().equals(inGenre)) {
-                            System.out.println(paper);
-                        }
-                    }
-                }
-                printMenu();
-                break;
+				String inGenre = in.next().toUpperCase();
+				for (Book paper : books) {
+					if (paper instanceof Paperbacks) {
+						if (((Paperbacks) paper).getGenre().equals(inGenre)) {
+							System.out.println(((Paperbacks) paper).printPaper());
+						}
+					}
+				}
+				printMenu();
+				break;
 
-				// periodicals
+			// periodicals
 			case 4:
 				System.out.println(
 						"Enter a frequency (D for Daily, W for Weekly, M for Monthly, B for Biweekly, or Q for Quarterly):");
-                String inFrequency = in.next().toUpperCase();
-                for (Book period : books) {
-                    if (period instanceof Periodicals) {
-                        if (((Periodicals) period).getFrequency().equals(inFrequency)) {
-                            System.out.println(period);
-                        }
-                    }
-                }
-                printMenu();
-                break;
+				String inFrequency = in.next().toUpperCase();
+				for (Book period : books) {
+					if (period instanceof Periodicals) {
+						if (((Periodicals) period).getFrequency().equals(inFrequency)) {
+							System.out.println(((Periodicals) period).printPeriod());
+						}
+					}
+				}
+				printMenu();
+				break;
 		}
 	}
 
@@ -220,154 +224,16 @@ public class BookManager extends Book {
 		}
 		printMenu();
 	}
+
+	public void saveAndExit() throws IOException {
+		boolean flag = true;
+		if (flag == true) {
+			try (Writer instream = new FileWriter("res/books.txt", false)) {
+				for (Book entry : books)
+					instream.write(entry + "\n");
+			} catch (IOException e) {
+				System.out.println("The file could not be written to!");
+			}
+		}
+	}
 }
-
-// private String checkOut() {
-// // get isbn
-//
-// System.out.println("Enter ISBN of book: ");
-//
-// // check isbn inside books
-// // if isbn does not exist, print error
-// if (books.contains(isbn_input)) {
-// // check availability
-// if (check_book.getAvailable() > 0) {
-// // update availability -1,
-// System.out.println("The book " + check_book.getTitle() + "has been checked
-// out.");
-// System.out.println("It can be located using call number: " +
-// check_book.getCallNumber());
-// } else {
-// // if not available print msg
-// System.out.println("The book is not available.");
-// }
-// } else {
-// // print error message
-// System.out.println("Error: ISBN does not exist.");
-// }
-//
-// }
-
-// private String findBooks() {
-// System.out.println("Enter title to search for: ");
-// // case sensitive
-// // use for loop to find each title
-// for () {
-// // should be a to string, since were using this for the next method too
-// System.out.println("Matching Books:");
-// System.out.println("ISBN: " + getIsbn());
-// System.out.println("Call Number: " + getCallNumber());
-// System.out.println("Available: " + getAvailable());
-// System.out.println("Total: " + getTotal());
-// System.out.println("Title: " + getTitle());
-// // check type for extra param print
-// if (book == Childrens_books) {
-// System.out.println("Authors: " + getAuthors());
-// System.out.println("Format: " + getFormat());
-// } else if (book == Cookbooks) {
-//
-// } else if (book == Paperbacks) {
-//
-// } else {
-// // periodicals
-// }
-// }
-// }
-//
-// private String dispayBooks() {
-// System.out.println("# Type");
-// System.out.println("1 Children's Books");
-// System.out.println("2 Cookbooks");
-// System.out.println("3 Paperbacks");
-// System.out.println("4 Periodicals");
-//
-// System.out.println("Enter type of book: ");
-// // need downcasting
-//
-// if (type == 4) {
-// System.out.println(
-// "Enter a frequency (D for Daily, W for Weekly, M for Monthly, B for Biweekly,
-// or Q for Quarterly): ");
-// } else {
-//
-// }
-//
-// }
-//
-//
-// private String saveExit() {
-// // save changes to .txt?
-// System.out.println("Goodbye");
-// }
-
-/*
- * private Wage getHighestPaidWageEmployee() {
- * Wage wage = null;
- * double highestPay = 0;
- * 
- * for (int i = 0; i < employees.size(); i++) {
- * Employee employee = employees.get(i);
- * if (employee instanceof Wage) {
- * if (employee.getPay() > highestPay) {
- * highestPay = employee.getPay();
- * wage = (Wage) employee;
- * }
- * }
- * }
- * return wage;
- * }
- * 
- * private Salaried getLowestPaidSalariedEmployee() {
- * Salaried salaried = null;
- * double lowestPay = 0;
- * boolean first = true;
- * for (int i = 0; i < employees.size(); i++) {
- * Employee employee = employees.get(i);
- * if (employee instanceof Salaried) {
- * if (first) {
- * lowestPay = employee.getPay();
- * first = false;
- * }
- * if (employee.getPay() <= lowestPay) {
- * lowestPay = employee.getPay();
- * salaried = (Salaried) employee;
- * }
- * }
- * }
- * return salaried;
- * }
- * 
- * private double getEmployeePercentage(String type) {
- * int count = 0;
- * 
- * switch (type) {
- * case "PartTime":
- * for (Employee emp : employees) {
- * if (emp instanceof PartTime) {
- * count++;
- * }
- * 
- * }
- * break;
- * 
- * case "Wage":
- * for (Employee emp : employees) {
- * if (emp instanceof Wage) {
- * count++;
- * }
- * 
- * }
- * break;
- * 
- * case "Salaried":
- * for (Employee emp : employees) {
- * if (emp instanceof Salaried) {
- * count++;
- * }
- * 
- * }
- * break;
- * }
- * return 100.0 * count / employees.size();
- * }
- */

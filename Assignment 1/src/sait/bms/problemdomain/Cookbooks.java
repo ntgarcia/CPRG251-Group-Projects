@@ -30,8 +30,7 @@ public class Cookbooks extends Book {
         this.diet = diet;
     }
 
-    @Override
-    public String toString() {
+    public String printCook() {
         // return "ISBN: " + getIsbn() + "\r\n" + "Call Number: " + getCallNumber() +
         // "\r\n" + "Available: " + getAvailable() + "\r\n" + "Total: " + getTotal()
         // + "\r\n" + "Title: " + getTitle() + "\r\n" + "Publisher: " + getPublisher() +
@@ -39,6 +38,11 @@ public class Cookbooks extends Book {
         return String.format(
                 "ISBN:%25s%nCall Number:%16s%nAvailable:%7d%nTotal:%20d%nTitle:%20s%nPublisher:%20s%nDiet%20s%n",
                 getIsbn(), getCallNumber(), getAvailable(), getTotal(), getTitle(), getPublisher(), getDiet());
+    }
+
+    @Override
+    public String toString() {
+        return getIsbn() + ";" + getCallNumber() + ";" + getAvailable() + ";" + getTotal() + ";" + getTitle() + ";" + getPublisher() + ";" + getDiet();
     }
 
 }

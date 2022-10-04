@@ -14,8 +14,7 @@ public class Paperbacks extends Book {
         this.genre = genre;
     }
 
-    @Override
-    public String toString() {
+    public String printPaper() {
         // return "ISBN: " + getIsbn() + "\r\n" + "Call Number: " + getCallNumber() +
         // "\r\n" + "Available: " + getAvailable() + "\r\n" + "Total: " + getTotal()
         // + "\r\n" + "Title: " + getTitle() + "\r\n" + "Authors: " + getAuthors() +
@@ -24,6 +23,13 @@ public class Paperbacks extends Book {
                 "ISBN:%25s%nCall Number:%16s%nAvailable:%7d%nTotal:%20d%nTitle:%20s%nAuthors:%20s%nYear%20d%nGenre%20s%n",
                 getIsbn(), getCallNumber(), getAvailable(), getTotal(), getTitle(), getAuthors(), getYear(),
                 getGenre());
+    }
+
+    @Override
+    public String toString() {
+        return getIsbn() + ";" + getCallNumber() + ";" + getAvailable() + ";" + getTotal() + ";" + getTitle() + ";" + getAuthors() + ";" + getYear() + ";" +
+                getGenre();
+
     }
 
     public String getAuthors() {
