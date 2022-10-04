@@ -27,19 +27,23 @@ public class Childrens_books extends Book {
 	public void setFormat(String format) {
 		this.format = format;
 	}
-	
-	public String printChild() {
-	    return String.format(
-	                "ISBN:%25s%nCall Number:%16s%nAvailable:%7d%nTotal:%20d%nTitle:%20s%nAuthors:%20s%nFormat%20s%n",
-	                getIsbn(), getCallNumber(), getAvailable(), getTotal(), getTitle(), getAuthors(), getFormat());
 
+	public String printChild() {
+		String sIsbn = String.format("%-15s%-15s%n", "ISBN:", getIsbn());
+		String sCN = String.format("%-15s%-15s%n", "Call Number:", getCallNumber());
+		String sAv = String.format("%-15s%-15d%n", "Available:", getAvailable());
+		String sTo = String.format("%-15s%-15d%n", "Total:", getTotal());
+		String sTi = String.format("%-15s%-15s%n", "Title:", getTitle());
+		String sAu = String.format("%-15s%-15s%n", "Authors:", getAuthors());
+		String sFo = String.format("%-15s%-15s%n", "Format:", getFormat());
+
+		return sIsbn + sCN + sAv + sTo + sTi + sAu + sFo;
 	}
 
 	@Override
 	public String toString() {
-		return getIsbn() + ";" + getCallNumber() + ";" + getAvailable() + ";" + getTotal() + ";" + getTitle() + ";" + getAuthors() + ";" + getFormat();
+		return getIsbn() + ";" + getCallNumber() + ";" + getAvailable() + ";" + getTotal() + ";" + getTitle() + ";"
+				+ getAuthors() + ";" + getFormat();
 	}
-	
-	
 
 }

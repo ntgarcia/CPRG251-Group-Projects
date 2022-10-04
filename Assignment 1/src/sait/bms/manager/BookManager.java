@@ -206,24 +206,31 @@ public class BookManager extends Book {
 		// shuffle list, then pick first n number
 		int numberOfBooks = in.nextInt();
 		Collections.shuffle(books);
-		System.out.println("\r\nRandom books");
+		System.out.println("\r\nRandom books:");
 
 		// while loop: make counter equal i. while counter i not equal to zero, print a
 		// book, and then --
 		while (numberOfBooks != 0) {
-			if (books.get(numberOfBooks) instanceof Cookbooks) {
-				System.out.println(books.get(numberOfBooks));
-			} else if (books.get(numberOfBooks) instanceof Childrens_books) {
-				System.out.println(books.get(numberOfBooks));
-			} else if (books.get(numberOfBooks) instanceof Paperbacks) {
-				System.out.println(books.get(numberOfBooks));
-			} else if (books.get(numberOfBooks) instanceof Periodicals) {
-				System.out.println(books.get(numberOfBooks));
-			}
+		    for (Book bookRandom : books) {
+                if (bookRandom instanceof Childrens_books) {
+                    System.out.println(((Childrens_books) bookRandom).printChild());
+                    
+                } else if (bookRandom instanceof Cookbooks) {
+                    System.out.println(((Cookbooks) bookRandom).printCook());
+                
+                } else if (bookRandom instanceof Paperbacks) {
+                    System.out.println(((Paperbacks) bookRandom).printPaper());
+                    
+                } else {
+                    System.out.println(((Periodicals) bookRandom).printPeriod());
+                }
+		    }
+
 			numberOfBooks--;
 		}
 		printMenu();
 	}
+	//}
 
 	public void saveAndExit() throws IOException {
 		boolean flag = true;

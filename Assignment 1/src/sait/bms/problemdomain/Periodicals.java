@@ -10,12 +10,14 @@ public class Periodicals extends Book {
     }
 
     public String printPeriod() {
-        // return "ISBN: " + getIsbn() + "\r\n" + "Call Number: " + getCallNumber() +
-        // "\r\n" + "Available: " + getAvailable() + "\r\n" + "Total: " + getTotal()
-        // + "\r\n" + "Title: " + getTitle() + "\r\n" + "Frequency: " + getFrequency() +
-        // "\r\n";
-        return String.format("ISBN:%25s%nCall Number:%16s%nAvailable:%7d%nTotal:%20d%nTitle:%20s%nFrequency:%20s%n",
-                getIsbn(), getCallNumber(), getAvailable(), getTotal(), getTitle(), getFrequency());
+        String sIsbn = String.format("%-15s%-15s%n", "ISBN:", getIsbn());
+        String sCN = String.format("%-15s%-15s%n", "Call Number:", getCallNumber());
+        String sAv = String.format("%-15s%-15d%n", "Available:", getAvailable());
+        String sTo = String.format("%-15s%-15d%n", "Total:", getTotal());
+        String sTi = String.format("%-15s%-15s%n", "Title:", getTitle());
+        String sFe = String.format("%-15s%-15d%n", "Authors:", getFrequency());
+
+        return sIsbn + sCN + sAv + sTo + sTi + sFe;
     }
 
     @Override

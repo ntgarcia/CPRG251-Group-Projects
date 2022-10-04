@@ -31,18 +31,21 @@ public class Cookbooks extends Book {
     }
 
     public String printCook() {
-        // return "ISBN: " + getIsbn() + "\r\n" + "Call Number: " + getCallNumber() +
-        // "\r\n" + "Available: " + getAvailable() + "\r\n" + "Total: " + getTotal()
-        // + "\r\n" + "Title: " + getTitle() + "\r\n" + "Publisher: " + getPublisher() +
-        // "\r\n" + "Diet: " + getDiet() + "\r\n";
-        return String.format(
-                "ISBN:%25s%nCall Number:%16s%nAvailable:%7d%nTotal:%20d%nTitle:%20s%nPublisher:%20s%nDiet%20s%n",
-                getIsbn(), getCallNumber(), getAvailable(), getTotal(), getTitle(), getPublisher(), getDiet());
+        String sIsbn = String.format("%-15s%-15s%n", "ISBN:", getIsbn());
+        String sCN = String.format("%-15s%-15s%n", "Call Number:", getCallNumber());
+        String sAv = String.format("%-15s%-15d%n", "Available:", getAvailable());
+        String sTo = String.format("%-15s%-15d%n", "Total:", getTotal());
+        String sTi = String.format("%-15s%-15s%n", "Title:", getTitle());
+        String sPu = String.format("%-15s%-15s%n", "Authors:", getPublisher());
+        String sDi = String.format("%-15s%-15s%n", "Format:", getDiet());
+
+        return sIsbn + sCN + sAv + sTo + sTi + sPu + sDi;
     }
 
     @Override
     public String toString() {
-        return getIsbn() + ";" + getCallNumber() + ";" + getAvailable() + ";" + getTotal() + ";" + getTitle() + ";" + getPublisher() + ";" + getDiet();
+        return getIsbn() + ";" + getCallNumber() + ";" + getAvailable() + ";" + getTotal() + ";" + getTitle() + ";"
+                + getPublisher() + ";" + getDiet();
     }
 
 }

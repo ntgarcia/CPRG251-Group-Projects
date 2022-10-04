@@ -15,19 +15,21 @@ public class Paperbacks extends Book {
     }
 
     public String printPaper() {
-        // return "ISBN: " + getIsbn() + "\r\n" + "Call Number: " + getCallNumber() +
-        // "\r\n" + "Available: " + getAvailable() + "\r\n" + "Total: " + getTotal()
-        // + "\r\n" + "Title: " + getTitle() + "\r\n" + "Authors: " + getAuthors() +
-        // "\r\n" + "Year: " + getYear() + "\r\n" + "Genre: " + getGenre() + "\r\n";
-        return String.format(
-                "ISBN:%25s%nCall Number:%16s%nAvailable:%7d%nTotal:%20d%nTitle:%20s%nAuthors:%20s%nYear%20d%nGenre%20s%n",
-                getIsbn(), getCallNumber(), getAvailable(), getTotal(), getTitle(), getAuthors(), getYear(),
-                getGenre());
+        String sIsbn = String.format("%-15s%-15s%n", "ISBN:", getIsbn());
+        String sCN = String.format("%-15s%-15s%n", "Call Number:", getCallNumber());
+        String sAv = String.format("%-15s%-15d%n", "Available:", getAvailable());
+        String sTo = String.format("%-15s%-15d%n", "Total:", getTotal());
+        String sTi = String.format("%-15s%-15s%n", "Title:", getTitle());
+        String sYe = String.format("%-15s%-15d%n", "Authors:", getYear());
+        String sGe = String.format("%-15s%-15s%n", "Format:", getGenre());
+
+        return sIsbn + sCN + sAv + sTo + sTi + sYe + sGe;
     }
 
     @Override
     public String toString() {
-        return getIsbn() + ";" + getCallNumber() + ";" + getAvailable() + ";" + getTotal() + ";" + getTitle() + ";" + getAuthors() + ";" + getYear() + ";" +
+        return getIsbn() + ";" + getCallNumber() + ";" + getAvailable() + ";" + getTotal() + ";" + getTitle() + ";"
+                + getAuthors() + ";" + getYear() + ";" +
                 getGenre();
 
     }
