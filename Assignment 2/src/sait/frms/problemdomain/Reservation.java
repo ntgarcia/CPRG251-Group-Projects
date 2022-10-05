@@ -12,6 +12,16 @@ public abstract class Reservation {
     public Reservation() {
     }
 
+    /**
+     * 
+     * @param code
+     * @param flightCode
+     * @param airline
+     * @param name
+     * @param citizenship
+     * @param cost
+     * @param active
+     */
     public Reservation(String code, String flightCode, String airline, String name, String citizenship, double cost,
             boolean active) {
         this.code = code;
@@ -23,42 +33,88 @@ public abstract class Reservation {
         this.active = active;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getCode() {
         return this.code;
     }
+
+    /**
+     * 
+     * @return
+     */
 
     public String getFlightCode() {
         return this.flightCode;
     }
 
+    /**
+     * 
+     * @return
+     */
+
     public String getAirline() {
         return this.airline;
     }
+
+    /**
+     * 
+     * @return
+     */
 
     public String getName() {
         return this.name;
     }
 
+    /**
+     * 
+     * @return
+     */
+
     public String getCitizenship() {
         return this.citizenship;
     }
+
+    /**
+     * 
+     * @return
+     */
 
     public double getCost() {
         return this.cost;
     }
 
+    /**
+     * 
+     * @return
+     */
+
     public boolean isActive() {
         return this.active;
     }
 
+    /**
+     * 
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * 
+     * @param citizenship
+     */
     public void setCitizenship(String citizenship) {
         this.citizenship = citizenship;
     }
 
+    /**
+     * 
+     * @param active
+     */
     public void setActive(boolean active) {
         this.active = active;
     }

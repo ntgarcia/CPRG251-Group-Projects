@@ -19,26 +19,51 @@ public class FlightManager {
     public FlightManager() {
     }
 
+    /**
+     * 
+     * @return
+     */
     public ArrayList<String> getAirports() {
         return airports;
 
     }
 
+    /**
+     * 
+     * @return
+     */
     public ArrayList<Flight> getFlights() {
         return flights;
 
     }
 
+    /**
+     * 
+     * @param code
+     * @return
+     */
     public String findAirportByCode(String code) {
         return code;
 
     }
 
+    /**
+     * 
+     * @param code
+     * @return
+     */
     public Flight findFlightByCode(String code) {
         return null;
 
     }
 
+    /**
+     * 
+     * @param from
+     * @param to
+     * @param weekday
+     * @return
+     */
     public ArrayList<Flight> findFlights(String from, String to, String weekday) {
         return flights;
 

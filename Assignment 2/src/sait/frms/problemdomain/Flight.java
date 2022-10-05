@@ -13,6 +13,17 @@ public abstract class Flight {
     public Flight() {
     }
 
+    /**
+     * 
+     * @param code
+     * @param airlineName
+     * @param from
+     * @param to
+     * @param weekday
+     * @param time
+     * @param seats
+     * @param costPerSeat
+     */
     public Flight(String code, String airlineName, String from, String to, String weekday, String time, int seats,
             double costPerSeat) {
         this.code = code;
@@ -25,42 +36,87 @@ public abstract class Flight {
         this.costPerSeat = costPerSeat;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getCode() {
         return this.code;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getAirlineName() {
         return this.airlineName;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getFrom() {
         return this.from;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getTo() {
         return this.to;
     }
+
+    /**
+     * 
+     * @return
+     */
 
     public String getWeekday() {
         return this.weekday;
     }
 
+    /**
+     * 
+     * @return
+     */
+
     public String getTime() {
         return this.time;
     }
+
+    /**
+     * 
+     * @return
+     */
 
     public int getSeats() {
         return this.seats;
     }
 
+    /**
+     * 
+     * @return
+     */
+
     public double getCostPerSeat() {
         return this.costPerSeat;
     }
+
+    /**
+     * 
+     * @return
+     */
 
     public boolean isDomestic() {
         return false;
     }
 
+    /**
+     * 
+     * @param code
+     */
     private void parseCode(String code) {
 
     }
