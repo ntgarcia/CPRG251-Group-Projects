@@ -1,8 +1,6 @@
 package sait.frms.problemdomain;
 
 public abstract class Flight {
-
-    // attributes
     private String code;
     private String airlineName;
     private String from;
@@ -60,14 +58,14 @@ public abstract class Flight {
     }
 
     public boolean isDomestic() {
-
+        return false;
     }
 
-    public void parseCode(String code) {
+    private void parseCode(String code) {
 
     }
 
     public String toString() {
-
+        return airlineName;
     }
 }

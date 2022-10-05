@@ -64,7 +64,7 @@ public abstract class Reservation {
     }
 
     public String toString() {
-
+        return airline;
     }
 
 }
