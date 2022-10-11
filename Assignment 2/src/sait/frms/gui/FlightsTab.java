@@ -30,9 +30,7 @@ public class FlightsTab extends TabBase {
 
 	private DefaultListModel<Flight> flightsModel;
 
-	/**
-	 * Creates the components for flights tab.
-	 */
+
 	/**
 	 * Creates the components for flights tab.
 	 * 
