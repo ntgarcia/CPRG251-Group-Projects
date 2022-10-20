@@ -2,6 +2,7 @@ package sait.frms.gui;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.*;
 import javax.swing.event.*;
 
 import sait.frms.manager.FlightManager;
@@ -133,6 +134,12 @@ public class ReservationsTab extends TabBase {
 		gbc.gridy = 0;
 		// gbc.gridwidth = 1;
 		titleEastPanelNorth.setFont(new Font("Verdana", Font.PLAIN, 25));
+
+		// add padding
+		Border borderLabel = titleEastPanelNorth.getBorder();
+		Border marginLabel = new EmptyBorder(0, 0, 20, 0);
+		titleEastPanelNorth.setBorder(new CompoundBorder(borderLabel, marginLabel));
+
 		panel.add(titleEastPanelNorth, gbc);
 
 		// EastPanelCentre
@@ -236,6 +243,7 @@ public class ReservationsTab extends TabBase {
 		String[] status = { "Active", "Inactive" };
 		JComboBox<String> dropStatus = new JComboBox<>(status);
 		dropStatus.addActionListener(dropStatus);
+		dropStatus.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXXX");
 		gbc.gridx = 1;
 		gbc.gridy = 8;
 		panel.add(dropStatus, gbc);
@@ -246,6 +254,7 @@ public class ReservationsTab extends TabBase {
 		gbc.gridy = 9;
 		gbc.gridwidth = 2;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
+
 		panel.add(eastPanelSouthButton, gbc);
 
 		return panel;

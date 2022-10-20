@@ -2,6 +2,7 @@ package sait.frms.gui;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.*;
 import javax.swing.event.*;
 
 import sait.frms.manager.FlightManager;
@@ -128,15 +129,21 @@ public class FlightsTab extends TabBase {
          */
         panel.setLayout(new GridBagLayout());
 
-// EastPanelNorth 
+        // EastPanelNorth
         JLabel titleEastPanelNorth = new JLabel("Reserve");
         gbc.gridx = 1;
         gbc.gridy = 0;
         // gbc.gridwidth = 1;
         titleEastPanelNorth.setFont(new Font("Verdana", Font.PLAIN, 25));
+
+        // add padding
+        Border borderLabel = titleEastPanelNorth.getBorder();
+        Border marginLabel = new EmptyBorder(0, 0, 20, 0);
+        titleEastPanelNorth.setBorder(new CompoundBorder(borderLabel, marginLabel));
+
         panel.add(titleEastPanelNorth, gbc);
 
-// EastPanelCentre
+        // EastPanelCentre
 
         // Flight label
         JLabel labelFLight = new JLabel("Flight:");
@@ -227,7 +234,7 @@ public class FlightsTab extends TabBase {
         gbc.gridy = 7;
         panel.add(field7, gbc);
 
-// EastPanelSouth
+        // EastPanelSouth
         JButton eastPanelSouthButton = new JButton("Reserve");
         gbc.gridx = 0;
         gbc.gridy = 9;
@@ -247,7 +254,7 @@ public class FlightsTab extends TabBase {
 
         panel.setLayout(new GridBagLayout());
 
-// SouthPanelNorth	    
+        // SouthPanelNorth
         JLabel titleEastPanelSouth = new JLabel("Flight Finder");
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -255,7 +262,7 @@ public class FlightsTab extends TabBase {
         titleEastPanelSouth.setFont(new Font("Verdana", Font.PLAIN, 25));
         panel.add(titleEastPanelSouth, gbc);
 
-// SouthPanelCentre Label + Combo-Box
+        // SouthPanelCentre Label + Combo-Box
 
         // From label
         JLabel labelFrom = new JLabel("From:");
@@ -267,7 +274,8 @@ public class FlightsTab extends TabBase {
         String[] cb1Content = { "YYC", "Destination2" };
 
         // Combo-box1
-        JComboBox cb1 = new JComboBox(cb1Content);
+        JComboBox<String> cb1 = new JComboBox<>(cb1Content);
+        cb1.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
@@ -284,7 +292,7 @@ public class FlightsTab extends TabBase {
         String[] cb2Content = { "YYC", "Destination2" };
 
         // Combo-box2
-        JComboBox cb2 = new JComboBox(cb2Content);
+        JComboBox<String> cb2 = new JComboBox<>(cb2Content);
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.gridwidth = 1;
@@ -301,16 +309,16 @@ public class FlightsTab extends TabBase {
         String[] cb3Content = { "Any", "Date" };
 
         // Combo-box3
-        JComboBox cb3 = new JComboBox(cb3Content);
+        JComboBox<String> cb3 = new JComboBox<>(cb3Content);
         gbc.gridx = 1;
         gbc.gridy = 3;
         gbc.gridwidth = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(cb3, gbc);
 
-// SouthPanelSouth
+        // SouthPanelSouth
         JButton southPanelSouthButton = new JButton("Find Flights");
-        gbc.gridx = 0;
+        gbc.gridx = 1;
         gbc.gridy = 4;
         gbc.gridwidth = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;

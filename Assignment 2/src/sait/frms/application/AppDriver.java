@@ -33,6 +33,7 @@ public class AppDriver {
 		} catch (IllegalAccessException e) {
 			// handle exception
 		}
+
 		MainWindow mainWindow = new MainWindow();
 		mainWindow.display();
 	}

@@ -14,6 +14,7 @@ import sait.frms.manager.ReservationManager;
  * 
  */
 public class MainWindow extends JFrame {
+
 	private static final String TAB_FLIGHTS = "flights";
 	private static final String TAB_RESERVATIONS = "reservations";
 
@@ -71,6 +72,7 @@ public class MainWindow extends JFrame {
 
 		setTitle("Flight Reservation Management System");
 
+		setResizable(false);
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
