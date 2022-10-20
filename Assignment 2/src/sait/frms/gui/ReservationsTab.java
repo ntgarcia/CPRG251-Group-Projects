@@ -5,9 +5,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
 
-import sait.frms.manager.FlightManager;
 import sait.frms.manager.ReservationManager;
-import sait.frms.problemdomain.Flight;
 import sait.frms.problemdomain.Reservation;
 
 /**
@@ -16,23 +14,11 @@ import sait.frms.problemdomain.Reservation;
  */
 public class ReservationsTab extends TabBase {
 	/**
-	 * Instance of flight manager.
-	 */
-	private FlightManager flightManager;
-
-	/**
 	 * Instance of reservation manager.
 	 */
 	private ReservationManager reservationManager;
 
 	private JList<Reservation> reservationsList;
-
-	/**
-	 * List of flights.
-	 */
-	private JList<Flight> flightsList;
-
-	private DefaultListModel<Flight> flightsModel;
 
 	/*
 	 * PK PK - Instantiate a GridBagConstraint object for the GridBagLayout object
@@ -97,16 +83,15 @@ public class ReservationsTab extends TabBase {
 
 		panel.setLayout(new BorderLayout());
 
-		flightsModel = new DefaultListModel<>();
-		flightsList = new JList<>(flightsModel);
+		reservationsList = new JList<>();
 
 		// User can only select one item at a time.
-		flightsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		reservationsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		// Wrap JList in JScrollPane so it is scrollable.
-		JScrollPane scrollPane = new JScrollPane(this.flightsList);
+		JScrollPane scrollPane = new JScrollPane(this.reservationsList);
 
-		flightsList.addListSelectionListener(new MyListSelectionListener());
+		reservationsList.addListSelectionListener(new MyListSelectionListener());
 
 		panel.add(scrollPane);
 
