@@ -1,6 +1,9 @@
 package sait.frms.gui;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
@@ -42,6 +45,7 @@ public class FlightsTab extends TabBase {
      * 
      * @param flightManager      Instance of FlightManager.
      * @param reservationManager Instance of ReservationManager
+     * @throws FileNotFoundException
      */
     public FlightsTab(FlightManager flightManager, ReservationManager reservationManager) {
         this.flightManager = flightManager;
@@ -92,15 +96,44 @@ public class FlightsTab extends TabBase {
      * Creates the center panel.
      * 
      * @return JPanel that goes in center.
+     * @throws FileNotFoundException 
      */
     private JPanel createCenterPanel() {
+        
+        /*
+        PK - Instantiate the FlightManager constructor to use its methods and constants
+        
+        */
+        
+        flightManager = new FlightManager();
+        
+        /*
+        PK - Instantiate the FlightManager constructor to use its methods and constants
+        
+        */
+        
         JPanel panel = new JPanel();
 
         panel.setLayout(new BorderLayout());
 
         flightsModel = new DefaultListModel<>();
+        
+        //PK - add flight arraylist from Flight class to flightsModel variable
+//        for (int i = 0; i < .size(); i++) {
+        
+        flightsModel.addElement(new Flight("TB-4017", "Try a Bus Airways", "ATL","FRA","Monday","18:30",174,1444.00));
+        
+//        }
+        //PK - add flight arraylist from Flight class to flightsModel variable
+               
         flightsList = new JList<>(flightsModel);
 
+        //PK - Set model for the FlightsList
+        flightsList.setModel(flightsModel);
+        //PK - Set model for the FlightsList
+        
+      
+        
         // User can only select one item at a time.
         flightsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 

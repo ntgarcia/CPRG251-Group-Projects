@@ -1,6 +1,6 @@
 package sait.frms.problemdomain;
 
-public abstract class Flight {
+public class Flight {
     private String code;
     private String airlineName;
     private String from;
@@ -24,8 +24,7 @@ public abstract class Flight {
      * @param seats
      * @param costPerSeat
      */
-    public Flight(String code, String airlineName, String from, String to, String weekday, String time, int seats,
-            double costPerSeat) {
+    public Flight(String code, String airlineName, String from, String to, String weekday, String time, int seats, double costPerSeat) {
         this.code = code;
         this.airlineName = airlineName;
         this.from = from;
@@ -121,7 +120,21 @@ public abstract class Flight {
 
     }
 
+    @Override
     public String toString() {
-        return airlineName;
+        return "Flight [getCode()=" + getCode() + ", getAirlineName()=" + getAirlineName() + ", getFrom()=" + getFrom()
+                + ", getTo()=" + getTo() + ", getWeekday()=" + getWeekday() + ", getTime()=" + getTime()
+                + ", getSeats()=" + getSeats() + ", getCostPerSeat()=" + getCostPerSeat();
     }
+
+    
+    
+    
+    
+
+//    public String toString() {
+//        return getAirlineName();
+//    }
+    
+      
 }

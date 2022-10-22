@@ -1,9 +1,11 @@
 package sait.frms.manager;
 
 import java.util.ArrayList;
-import sait.frms.problemdomain.Flight;
+import java.util.Scanner;
+import sait.frms.problemdomain.Flight; //import the Flight class because these two classes are from different packages
+import java.io.*;
 
-public class FlightManager {
+public class FlightManager extends Flight { //extends Flight added by PK
     public String WEEKDAY_ANY;
     public String WEEKDAY_SUNDAY;
     public String WEEKDAY_MONDAY;
@@ -17,6 +19,7 @@ public class FlightManager {
     private ArrayList<String> airports;
 
     public FlightManager() {
+
     }
 
     /**
@@ -68,9 +71,22 @@ public class FlightManager {
         return flights;
 
     }
-
+    
+    //populate the arraylist of flights with this method
     private void populateFlights() {
-
+        try(Scanner in = new Scanner(new File("res/flights.csv"))) {
+            while (in.hasNext()) {
+                String line = in.nextLine();
+//                System.out.println(line);
+                String[] fields = line.split(",");
+                flights.add(new Flight(fields[0], fields[1],fields[2], fields[3], fields[4], fields[5], Integer.parseInt(fields[6]), Double.parseDouble(fields[7])));
+                System.out.println(flights.get(0));
+            }
+        
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     private void populateAirports() {

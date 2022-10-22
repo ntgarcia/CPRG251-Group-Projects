@@ -45,7 +45,7 @@ public class ReservationManager {
 
     }
 
-    public void persist() {
+    public void persist() { //save reservation arraylist into the bin file
 
     }
 
