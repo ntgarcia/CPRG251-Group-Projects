@@ -119,11 +119,11 @@ public class FlightsTab extends TabBase {
         flightsModel = new DefaultListModel<>();
         
         //PK - add flight arraylist from Flight class to flightsModel variable
-//        for (int i = 0; i < .size(); i++) {
+        for (int i = 0; i < flightManager.getFlights().size(); i++) {
         
-        flightsModel.addElement(new Flight("TB-4017", "Try a Bus Airways", "ATL","FRA","Monday","18:30",174,1444.00));
+        flightsModel.addElement(flightManager.getFlights().get(i));
         
-//        }
+        }
         //PK - add flight arraylist from Flight class to flightsModel variable
                
         flightsList = new JList<>(flightsModel);

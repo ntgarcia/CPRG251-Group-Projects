@@ -122,9 +122,8 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Flight [getCode()=" + getCode() + ", getAirlineName()=" + getAirlineName() + ", getFrom()=" + getFrom()
-                + ", getTo()=" + getTo() + ", getWeekday()=" + getWeekday() + ", getTime()=" + getTime()
-                + ", getSeats()=" + getSeats() + ", getCostPerSeat()=" + getCostPerSeat();
+        return getCode() + ", From: " + getFrom()
+                + ", To: " + getTo() + ", Day: " + getWeekday() + ", Cost: " + getCostPerSeat();
     }
 
     

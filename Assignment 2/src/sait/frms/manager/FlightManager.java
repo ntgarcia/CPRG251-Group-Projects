@@ -15,11 +15,13 @@ public class FlightManager extends Flight { //extends Flight added by PK
     public String WEEKDAY_FRIDAY;
     public String WEEKDAY_SATURDAY;
 
-    private ArrayList<Flight> flights;
+    public ArrayList<Flight> flights;
     private ArrayList<String> airports;
-
+    
     public FlightManager() {
-
+        flights = new ArrayList<>();
+        populateFlights();
+        
     }
 
     /**
@@ -77,10 +79,8 @@ public class FlightManager extends Flight { //extends Flight added by PK
         try(Scanner in = new Scanner(new File("res/flights.csv"))) {
             while (in.hasNext()) {
                 String line = in.nextLine();
-//                System.out.println(line);
                 String[] fields = line.split(",");
                 flights.add(new Flight(fields[0], fields[1],fields[2], fields[3], fields[4], fields[5], Integer.parseInt(fields[6]), Double.parseDouble(fields[7])));
-                System.out.println(flights.get(0));
             }
         
         } catch (FileNotFoundException e) {
