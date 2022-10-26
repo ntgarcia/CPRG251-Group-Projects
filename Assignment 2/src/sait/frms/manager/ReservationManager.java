@@ -99,9 +99,9 @@ public class ReservationManager extends Reservation {
         String resCodeA;
 
         if ((firstFrom == "Y") && (firstTo == "Y")) {
-            flightCodeA = "D";
+            resCodeA = "D";
         } else {
-            flightCodeA = "I";
+            resCodeA = "I";
         }
 
         // generate random number for flightcode
