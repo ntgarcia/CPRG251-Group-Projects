@@ -119,8 +119,10 @@ public abstract class Reservation {
         this.active = active;
     }
 
+    @Override
     public String toString() {
-        return airline;
+        return getCode() + ";" + getFlightCode() + ";" + getAirline() + ";" + getName() + ";" + getCitizenship() + ";"
+                + getCost();
     }
 
 }

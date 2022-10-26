@@ -1,14 +1,36 @@
 package sait.frms.manager;
 
 import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 
 import sait.frms.problemdomain.Flight;
 import sait.frms.problemdomain.Reservation;
 
-public class ReservationManager {
+public class ReservationManager extends Reservation {
+    private static final String BINARY_FILE = "res/reserve.bin";
+    private static final String TEXT_FILE = "res/reserve.txt";
+    private static final String MODE = "rw";
     private ArrayList<Reservation> reservations;
 
+    /**
+     * Stores the singleton instance.
+     */
+    private static ReservationManager instance;
+
+    /**
+     * The instance of the Random Access File.
+     */
+    private RandomAccessFile raf;
+
     public ReservationManager() {
+        reservations = new ArrayList<>();
+        try {
+            populateFromBinary();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -45,7 +67,7 @@ public class ReservationManager {
 
     }
 
-    public void persist() { //save reservation arraylist into the bin file
+    public void persist() { // save reservation arraylist into the bin file
 
     }
 
@@ -60,16 +82,38 @@ public class ReservationManager {
     }
 
     /**
+     * Generates Reservation Code.
      * 
      * @param flight
      * @return
      */
     private String generateReservationCode(Flight flight) {
+        // check if flight is international or domestic
+        // get first letter of From and To
+
+        int n = from.length();
+
+        char firstFrom = from.charAt(0);
+        char firstTo = to.charAt(0);
+
+        String resCodeA;
+
+        if ((firstFrom == "Y") && (firstTo == "Y")) {
+            flightCodeA = "D";
+        } else {
+            flightCodeA = "I";
+        }
+
+        // generate random number for flightcode
+        double rng = Math.random() * (9999 - 1000 + 1) + 1000;
+
+        // combine A and B to form code
+        String resCode = resCodeA + rng;
+
         return null;
 
     }
 
-    private void populateFromBinary() {
-
+    private void populateFromBinary() throws IOException {
     }
 }
