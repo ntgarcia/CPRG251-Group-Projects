@@ -70,6 +70,28 @@ public class FlightManager extends Flight { //extends Flight added by PK
      * @return
      */
     public ArrayList<Flight> findFlights(String from, String to, String weekday) {
+        try(Scanner in = new Scanner(new File("res/flights.csv"))) {
+            System.out.println(from + " " + to + " " + weekday);
+            while (in.hasNext()) {
+                String line = in.nextLine();
+                String[] fields = line.split(",");
+                if (weekday.contains("Any") ) {
+                    if (fields[2].contains(from) && fields[3].contains(to)) {
+                        flights.add(new Flight(fields[0], fields[1],fields[2], fields[3], fields[4], fields[5], Integer.parseInt(fields[6]), Double.parseDouble(fields[7])));
+                        System.out.println(fields[2].contains(from));
+                        System.out.println(fields[3].contains(to));
+                        System.out.println(fields[4].contains(weekday));
+                    }
+                }
+            }
+            System.out.println(flights.size());
+//            in.close();
+        
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
         return flights;
 
     }
@@ -82,6 +104,8 @@ public class FlightManager extends Flight { //extends Flight added by PK
                 String[] fields = line.split(",");
                 flights.add(new Flight(fields[0], fields[1],fields[2], fields[3], fields[4], fields[5], Integer.parseInt(fields[6]), Double.parseDouble(fields[7])));
             }
+            
+            in.close();
         
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block

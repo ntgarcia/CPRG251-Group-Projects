@@ -1,6 +1,8 @@
 package sait.frms.gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -39,6 +41,14 @@ public class FlightsTab extends TabBase {
      * to call
      */
     GridBagConstraints gbc = new GridBagConstraints();
+    
+    /*
+     * Instantiate the combo-boxes at the global-level to be used in the
+     * event-listener method
+     */    
+    JComboBox<String> cb1;
+    JComboBox<String> cb2;
+    JComboBox<String> cb3;
 
     /**
      * Creates the components for flights tab.
@@ -304,10 +314,10 @@ public class FlightsTab extends TabBase {
         panel.add(labelFrom, gbc);
 
         // Content for combo-box1
-        String[] cb1Content = { "YYC", "Destination2" };
+        String[] cb1Content = { "YYC", "YEG", "YUL", "YOW", "YYZ", "YVR", "YWG", "ATL", "PEK", "DXB", "HKG", "LHR", "HND", "ORD", "PVG", "CDG", "AMS", "DEL", "FRA", "DFW" };
 
         // Combo-box1
-        JComboBox<String> cb1 = new JComboBox<>(cb1Content);
+        cb1 = new JComboBox<>(cb1Content);
         cb1.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         gbc.gridx = 1;
         gbc.gridy = 1;
@@ -322,10 +332,10 @@ public class FlightsTab extends TabBase {
         panel.add(labelTo, gbc);
 
         // Content for combo-box2
-        String[] cb2Content = { "YYC", "Destination2" };
+        String[] cb2Content = { "YYC", "YEG", "YUL", "YOW", "YYZ", "YVR", "YWG", "ATL", "PEK", "DXB", "HKG", "LHR", "HND", "ORD", "PVG", "CDG", "AMS", "DEL", "FRA", "DFW" };
 
         // Combo-box2
-        JComboBox<String> cb2 = new JComboBox<>(cb2Content);
+        cb2 = new JComboBox<>(cb2Content);
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.gridwidth = 1;
@@ -339,10 +349,10 @@ public class FlightsTab extends TabBase {
         panel.add(labelDay, gbc);
 
         // Content for combo-box3
-        String[] cb3Content = { "Any", "Date" };
+        String[] cb3Content = { "Any", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
         // Combo-box3
-        JComboBox<String> cb3 = new JComboBox<>(cb3Content);
+        cb3 = new JComboBox<>(cb3Content);
         gbc.gridx = 1;
         gbc.gridy = 3;
         gbc.gridwidth = 1;
@@ -351,15 +361,47 @@ public class FlightsTab extends TabBase {
 
         // SouthPanelSouth
         JButton southPanelSouthButton = new JButton("Find Flights");
+        
+        //PK - add actionlisterner to JButton
+        southPanelSouthButton.addActionListener(new FindFlightButtonListener());
+        //PK - add actionlisterner to JButton
         gbc.gridx = 1;
         gbc.gridy = 4;
         gbc.gridwidth = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(southPanelSouthButton, gbc);
 
+        
         return panel;
     }
 
+    /*
+     * Action to perform for the Find Flight JButton 
+     */    
+    private class FindFlightButtonListener implements ActionListener {
+        /**
+         * The actionPerformed method executes when the user clicks on the Calculate
+         * button.
+         * 
+         * @param e The event object.
+         */
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String from = (String) cb1.getSelectedItem();
+            String to = (String) cb2.getSelectedItem();
+            String weekday = (String) cb3.getSelectedItem();
+            flightManager.findFlights(from, to, weekday);
+           
+        }
+
+        
+    }
+    /*
+     * Action to perform for the Find Flight JButton 
+     */ 
+    
+    
     private class MyListSelectionListener implements ListSelectionListener {
         /**
          * Called when user selects an item in the JList.
