@@ -11,6 +11,7 @@ public class ReservationManager extends Reservation {
     private static final String BINARY_FILE = "res/reserve.bin";
     private static final String TEXT_FILE = "res/reserve.txt";
     private static final String MODE = "rw";
+    private static final int RESERVE_SIZE = 0; // 6 + 102 + 102 + 102 + 102 + 8 + 1
     private ArrayList<Reservation> reservations;
 
     /**
@@ -87,18 +88,18 @@ public class ReservationManager extends Reservation {
      * @param flight
      * @return
      */
-    private String generateReservationCode(Flight flight) {
+    public String generateReservationCode(Flight flight) {
         // check if flight is international or domestic
         // get first letter of From and To
 
-        int n = from.length();
+        int n = (flight.getFrom()).length();
 
-        char firstFrom = from.charAt(0);
-        char firstTo = to.charAt(0);
+        char firstFrom = (flight.getFrom()).charAt(0);
+        char firstTo = (flight.getTo()).charAt(0);
 
         String resCodeA;
 
-        if ((firstFrom == "Y") && (firstTo == "Y")) {
+        if ((firstFrom == 'Y') && (firstTo == 'Y')) {
             resCodeA = "D";
         } else {
             resCodeA = "I";
