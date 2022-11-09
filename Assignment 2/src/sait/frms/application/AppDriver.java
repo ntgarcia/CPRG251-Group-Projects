@@ -19,7 +19,7 @@ public class AppDriver {
 	 * Entry point to Java application.
 	 * 
 	 * @param args
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
 	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		try {
