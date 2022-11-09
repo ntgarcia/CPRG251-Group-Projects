@@ -1,6 +1,7 @@
 package sait.frms.manager;
 
 import java.util.ArrayList;
+
 import java.util.Scanner;
 import sait.frms.problemdomain.Flight; //import the Flight class because these two classes are from different packages
 import java.io.*;
@@ -69,7 +70,7 @@ public class FlightManager extends Flight { //extends Flight added by PK
     public Flight findFlightByCode(String code) {
         for(int i =0; i<flights.size(); i++) {
             Flight flight =flights.get(i);
-            if (flight.getCode().equalsIgnoreCase(code)) {
+            if (flight.getCode().equals(code)) {
                 return flight;
             }
         }

@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -134,18 +135,6 @@ public class FlightsTab extends TabBase {
      * @throws FileNotFoundException 
      */
     private JPanel createCenterPanel() {
-        
-        /*
-        PK - Instantiate the FlightManager constructor to use its methods and constants
-        
-        */
-        
-        flightManager = new FlightManager();
-        
-        /*
-        PK - Instantiate the FlightManager constructor to use its methods and constants
-        
-        */
         
         JPanel panel = new JPanel();
 
@@ -481,8 +470,15 @@ public class FlightsTab extends TabBase {
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            reservationManager.makeReservation(flight, field6.getText(), field7.getText());
-           
+            //throw exception if flight is fully booked or flight is null or the name/citizenship is null.
+       
+            try {
+                reservationManager.makeReservation(flightsList.getSelectedValue(), field6.getText(), field7.getText());
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            
         }
 
         

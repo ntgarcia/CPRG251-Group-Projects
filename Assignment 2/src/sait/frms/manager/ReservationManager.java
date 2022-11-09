@@ -11,7 +11,7 @@ public class ReservationManager extends Reservation {
     private static final String BINARY_FILE = "res/reserve.bin";
     private static final String TEXT_FILE = "res/reserve.txt";
     private static final String MODE = "rw";
-    private static final int RESERVE_SIZE = 0; // 6 + 102 + 102 + 102 + 102 + 8 + 1
+    private static final int RESERVE_SIZE = 331;
     private ArrayList<Reservation> reservations;
 
     /**
@@ -24,7 +24,15 @@ public class ReservationManager extends Reservation {
      */
     private RandomAccessFile raf;
 
-    public ReservationManager() {
+    public ReservationManager() throws FileNotFoundException {
+        super();
+        this.raf = new RandomAccessFile(BINARY_FILE, MODE);
+        
+     // If length is 0, load from text file
+//        if (this.raf.length() == 0) {
+//            this.loadFromText(); // either populatefrombinary or from a text file
+//        }
+        
         reservations = new ArrayList<>();
         try {
             populateFromBinary();
@@ -40,10 +48,24 @@ public class ReservationManager extends Reservation {
      * @param name
      * @param citizenship
      * @return
+     * @throws IOException 
      */
-    public Reservation makeReservation(Flight flight, String name, String citizenship) {
-        return null;
-
+    public Reservation makeReservation(Flight flight, String name, String citizenship) throws IOException {
+        //save reservation to Binary file and return value
+        //use an if-statement to check for available seats and if name/citizenship is not null
+        String resCode = generateReservationCode(flight);
+        String flightCode = flight.getCode();
+        String airline = flight.getAirlineName();
+        String passName = name;
+        String citi = citizenship;
+        double cost = flight.getCostPerSeat();
+        boolean active = true;
+        
+        //have to also deduct the available seat from the flight
+        
+        System.out.println(new Reservation(resCode, flightCode, airline, passName, citi, cost, active));
+        return new Reservation(resCode, flightCode, airline, passName, citi, cost, active);
+        
     }
 
     /**
@@ -54,22 +76,56 @@ public class ReservationManager extends Reservation {
      * @return
      */
     public ArrayList<Reservation> findReservations(String code, String airline, String name) {
-        return reservations;
+        ArrayList<Reservation> matchReservation = new ArrayList<>();
+
+        for (Reservation r : reservations) {
+            if (r.getCode().toUpperCase().equals(code) || r.getAirline().toUpperCase().equals(airline)
+                    || r.getName().toUpperCase().equals(name)) {
+                matchReservation.add(r);
+            }
+        }
+        return matchReservation;
 
     }
 
     /**
+     * Find reservation using the reservation code
      * 
-     * @param code
-     * @return
+     * @param code reservation code
+     * @return found reservation object
      */
     public Reservation findReservationByCode(String code) {
+        for (Reservation r : reservations) {
+            if (r.getCode().equals(code)) {
+                return r;
+            }
+        }
         return null;
-
     }
 
-    public void persist() { // save reservation arraylist into the bin file
+    public void persist() throws IOException { // save reservation arraylist into the bin file
+        for (int i = 0; i < reservations.size(); i++) {
+            String resCode = reservations.get(i).getCode();
+            raf.writeUTF(resCode);
+            
+            String flightCode = reservations.get(i).getFlightCode();
+            raf.writeUTF(flightCode);
 
+            String airline = reservations.get(i).getAirline();
+            raf.writeUTF(airline);
+
+            String passName = reservations.get(i).getName();
+            raf.writeUTF(passName);
+
+            String citi = reservations.get(i).getCitizenship();
+            raf.writeUTF(citi);
+            
+            double cost = reservations.get(i).getCost();
+            raf.writeDouble(cost);
+            
+            raf.close();
+
+        }
     }
 
     /**
@@ -93,7 +149,6 @@ public class ReservationManager extends Reservation {
         // get first letter of From and To
 
         int n = (flight.getFrom()).length();
-
         char firstFrom = (flight.getFrom()).charAt(0);
         char firstTo = (flight.getTo()).charAt(0);
 
@@ -106,15 +161,28 @@ public class ReservationManager extends Reservation {
         }
 
         // generate random number for flightcode
-        double rng = Math.random() * (9999 - 1000 + 1) + 1000;
+        int rng = (int)(Math.random() * (9999 - 1000 + 1) + 1000);
 
         // combine A and B to form code
         String resCode = resCodeA + rng;
+        System.out.println(resCode);
 
         return resCode;
 
     }
 
     private void populateFromBinary() throws IOException {
+        raf = new RandomAccessFile(BINARY_FILE, MODE);
+        while(raf.getFilePointer() < raf.length()) {
+            raf.seek(0); //tells the program to read from the start
+            String resCode = raf.readUTF().trim();
+            String flightCode = raf.readUTF().trim();
+            String airline = raf.readUTF().trim();
+            String passName = raf.readUTF().trim();
+            String citi = raf.readUTF().trim();
+            double cost = raf.readDouble();
+            boolean active = raf.readBoolean();
+            System.out.println(new Reservation(resCode, flightCode, airline, passName, citi, cost, active));
+        }
     }
 }

@@ -1,6 +1,6 @@
 package sait.frms.problemdomain;
 
-public abstract class Reservation {
+public class Reservation {
     private String code;
     private String flightCode;
     private String airline;
