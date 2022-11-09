@@ -315,12 +315,6 @@ public class ReservationsTab extends TabBase {
 		gbc.gridy = 4;
 		gbc.gridwidth = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		southPanelSouthButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(southPanelSouthButton, "Reservation Made.");
-			}
-		});
 		panel.add(southPanelSouthButton, gbc);
 
 		return panel;
