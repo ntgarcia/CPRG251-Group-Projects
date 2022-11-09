@@ -4,6 +4,9 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 import sait.frms.manager.ReservationManager;
 import sait.frms.problemdomain.Reservation;
@@ -312,6 +315,12 @@ public class ReservationsTab extends TabBase {
 		gbc.gridy = 4;
 		gbc.gridwidth = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
+		southPanelSouthButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(southPanelSouthButton, "Reservation Made.");
+			}
+		});
 		panel.add(southPanelSouthButton, gbc);
 
 		return panel;

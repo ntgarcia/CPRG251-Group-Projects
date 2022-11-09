@@ -111,7 +111,7 @@ public class ReservationManager extends Reservation {
         // combine A and B to form code
         String resCode = resCodeA + rng;
 
-        return null;
+        return resCode;
 
     }
 
