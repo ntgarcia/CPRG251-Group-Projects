@@ -109,7 +109,11 @@ public class Flight {
      */
 
     public boolean isDomestic() {
-        return false;
+        if (getTo().substring(0,1) == "Y" && getFrom().substring(0,1) == "Y") {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -117,13 +121,33 @@ public class Flight {
      * @param code
      */
     private void parseCode(String code) {
+        if (code.substring(0, 1).equals("OA")) {
+            this.airlineName = "Otto Airlines";
+        }
 
+
+
+       else if (code.substring(0, 1).equals("CA")) {
+            this.airlineName = "Conned Air";
+        }
+
+
+
+       else if (code.substring(0, 1).equals("TB")) {
+            this.airlineName = "Try a Bus Airways";
+        }
+
+
+
+       else if (code.substring(0, 1).equals("VW")) {
+            this.airlineName = "Vertical Airways";
+        }
     }
 
     @Override
     public String toString() {
         return getCode() + ", From: " + getFrom()
-                + ", To: " + getTo() + ", Day: " + getWeekday() + ", Cost: " + getCostPerSeat();
+                + ", To: " + getTo() + ", Day: " + getWeekday() + ", Time: " + getTime() + ", Cost: " + getCostPerSeat();
     }
 
     

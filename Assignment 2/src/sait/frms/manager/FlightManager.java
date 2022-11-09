@@ -16,30 +16,35 @@ public class FlightManager extends Flight { //extends Flight added by PK
     public String WEEKDAY_SATURDAY;
 
     public ArrayList<Flight> flights;
+    public ArrayList<Flight> resultFlights;
     private ArrayList<String> airports;
     
     public FlightManager() {
+        super();
         flights = new ArrayList<>();
+        airports = new ArrayList<>();
         populateFlights();
-        
+        populateAirports();
     }
 
     /**
      * 
-     * @return
+     * @return gets airport information
+     * @throws FileNotFoundException if the file doesn't exist, throws Exception
      */
-    public ArrayList<String> getAirports() {
+
+    public ArrayList<String> getAirport() throws FileNotFoundException {
         return airports;
-
     }
-
+    
     /**
      * 
-     * @return
+     * @return gets Flight information
+     * @throws FileNotFoundException if the file doesn't exist, throws Exception
      */
-    public ArrayList<Flight> getFlights() {
+    
+    public ArrayList<Flight> getFlights() throws FileNotFoundException {
         return flights;
-
     }
 
     /**
@@ -48,8 +53,12 @@ public class FlightManager extends Flight { //extends Flight added by PK
      * @return
      */
     public String findAirportByCode(String code) {
+        for(int i=0; i< airports.size(); i++) {
+            if(airports.get(i) == (code)) {
+                return airports.get(i+1);
+            }
+        }
         return code;
-
     }
 
     /**
@@ -58,8 +67,13 @@ public class FlightManager extends Flight { //extends Flight added by PK
      * @return
      */
     public Flight findFlightByCode(String code) {
-        return null;
-
+        for(int i =0; i<flights.size(); i++) {
+            Flight flight =flights.get(i);
+            if (flight.getCode().equalsIgnoreCase(code)) {
+                return flight;
+            }
+        }
+        throw new RuntimeException("The code is invalid!");
     }
 
     /**
@@ -70,30 +84,21 @@ public class FlightManager extends Flight { //extends Flight added by PK
      * @return
      */
     public ArrayList<Flight> findFlights(String from, String to, String weekday) {
-        try(Scanner in = new Scanner(new File("res/flights.csv"))) {
-            System.out.println(from + " " + to + " " + weekday);
-            while (in.hasNext()) {
-                String line = in.nextLine();
-                String[] fields = line.split(",");
-                if (weekday.contains("Any") ) {
-                    if (fields[2].contains(from) && fields[3].contains(to)) {
-                        flights.add(new Flight(fields[0], fields[1],fields[2], fields[3], fields[4], fields[5], Integer.parseInt(fields[6]), Double.parseDouble(fields[7])));
-                        System.out.println(fields[2].contains(from));
-                        System.out.println(fields[3].contains(to));
-                        System.out.println(fields[4].contains(weekday));
-                    }
+        resultFlights = new ArrayList<>();
+        
+        for(int i =0; i<flights.size(); i++) {
+            Flight flight =flights.get(i);
+            if(weekday.equals("Any")) {
+                if (flight.getFrom().equals(from) && flight.getTo().equals(to)) {
+                    resultFlights.add(flight);
                 }
+            } else {
+            if(flight.getFrom().equals(from) && flight.getTo().equals(to) && flight.getWeekday().equals(weekday)) {
+                resultFlights.add(flight);
             }
-            System.out.println(flights.size());
-//            in.close();
-        
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            }
         }
-        
-        return flights;
-
+        return resultFlights;
     }
     
     //populate the arraylist of flights with this method
@@ -104,8 +109,6 @@ public class FlightManager extends Flight { //extends Flight added by PK
                 String[] fields = line.split(",");
                 flights.add(new Flight(fields[0], fields[1],fields[2], fields[3], fields[4], fields[5], Integer.parseInt(fields[6]), Double.parseDouble(fields[7])));
             }
-            
-            in.close();
         
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
@@ -114,7 +117,16 @@ public class FlightManager extends Flight { //extends Flight added by PK
     }
 
     private void populateAirports() {
-
+        try(Scanner in = new Scanner(new File("res/airports.csv"))) {
+            while (in.hasNext()) {
+                String[] Afield = in.nextLine().split(",");
+                String code = Afield[0];
+                airports.add(code);
+            }
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 }

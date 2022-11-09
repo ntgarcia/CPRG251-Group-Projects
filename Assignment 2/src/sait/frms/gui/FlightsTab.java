@@ -1,6 +1,8 @@
 package sait.frms.gui;
 
 import java.awt.*;
+
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -35,6 +37,17 @@ public class FlightsTab extends TabBase {
     private JList<Flight> flightsList;
 
     private DefaultListModel<Flight> flightsModel;
+    
+    /*
+     * PK - instance of flight
+     * 
+     */
+    private Flight flight;
+    
+    /*
+     * PK - instance of flight
+     * 
+     */
 
     /*
      * PK PK - Instantiate a GridBagConstraint object for the GridBagLayout object
@@ -49,6 +62,18 @@ public class FlightsTab extends TabBase {
     JComboBox<String> cb1;
     JComboBox<String> cb2;
     JComboBox<String> cb3;
+
+    /*
+     * Instantiate JTextField used in the east panel
+     * 
+     */    
+    JTextField field1;
+    JTextField field2;
+    JTextField field3;
+    JTextField field4;
+    JTextField field5;
+    JTextField field6;
+    JTextField field7;
 
     /**
      * Creates the components for flights tab.
@@ -127,14 +152,6 @@ public class FlightsTab extends TabBase {
         panel.setLayout(new BorderLayout());
 
         flightsModel = new DefaultListModel<>();
-        
-        //PK - add flight arraylist from Flight class to flightsModel variable
-        for (int i = 0; i < flightManager.getFlights().size(); i++) {
-        
-        flightsModel.addElement(flightManager.getFlights().get(i));
-        
-        }
-        //PK - add flight arraylist from Flight class to flightsModel variable
                
         flightsList = new JList<>(flightsModel);
 
@@ -150,7 +167,45 @@ public class FlightsTab extends TabBase {
         // Wrap JList in JScrollPane so it is scrollable.
         JScrollPane scrollPane = new JScrollPane(this.flightsList);
 
-        flightsList.addListSelectionListener(new MyListSelectionListener());
+        /*
+         * selectionlistener that listens to the selection of flight from the centre
+         * panel and populate the jtext
+         * 
+         * fields in the east panel 
+         */        
+        
+        flightsList.addListSelectionListener(new MyListSelectionListener() {
+            
+            @Override
+            public void valueChanged(ListSelectionEvent e ) {
+                String selectedItem = String.valueOf(flightsList.getSelectedValue());
+                String[] splitItem = selectedItem.split(",");
+                
+                field1.setText(splitItem[0]);
+                
+                switch (splitItem[0].substring(0,2)) {
+                    case "OA": field2.setText("Otto Airlines"); break;
+                    case "CA": field2.setText("Conned Air"); break;
+                    case "TB": field2.setText("Try a Bus Airways"); break;
+                    case "VA": field2.setText("Vertical Airways"); break;
+                    case "SL": field2.setText("Scare Airlines"); break;
+                    case "AL": field2.setText("Always Late Airlines"); break;
+                    case "MA": field2.setText("Mediocre Airlines"); break;
+                    case "GA": field2.setText("Gypped Air"); break;
+                    case "EC": field2.setText("Error Canada"); break;
+                    case "AS": field2.setText("AirShaker"); break;
+                    case "ST": field2.setText("ScareTransat"); break;
+                    case "SW": field2.setText("Sprawl Airways"); break;
+                    
+                }
+                
+                field3.setText(splitItem[3].substring(6,splitItem[3].length()));
+                field4.setText(splitItem[4].substring(7,splitItem[4].length()));
+                field5.setText(splitItem[5].substring(7,splitItem[5].length()));
+                
+                
+            }
+        });
 
         panel.add(scrollPane);
 
@@ -195,7 +250,7 @@ public class FlightsTab extends TabBase {
         panel.add(labelFLight, gbc);
 
         // Flight message field
-        JTextField field1 = new JTextField(20);
+        field1 = new JTextField(20);
         field1.setEditable(false);
         gbc.gridx = 1;
         gbc.gridy = 1;
@@ -208,7 +263,7 @@ public class FlightsTab extends TabBase {
         panel.add(labelAirline, gbc);
 
         // Airline message field
-        JTextField field2 = new JTextField(20);
+        field2 = new JTextField(20);
         field2.setEditable(false);
         gbc.gridx = 1;
         gbc.gridy = 2;
@@ -221,7 +276,7 @@ public class FlightsTab extends TabBase {
         panel.add(labelDay, gbc);
 
         // Day message field
-        JTextField field3 = new JTextField(20);
+        field3 = new JTextField(20);
         field3.setEditable(false);
         gbc.gridx = 1;
         gbc.gridy = 3;
@@ -234,7 +289,7 @@ public class FlightsTab extends TabBase {
         panel.add(labelTime, gbc);
 
         // Time message field
-        JTextField field4 = new JTextField(20);
+        field4 = new JTextField(20);
         field4.setEditable(false);
         gbc.gridx = 1;
         gbc.gridy = 4;
@@ -247,7 +302,7 @@ public class FlightsTab extends TabBase {
         panel.add(labelCost, gbc);
 
         // Cost message field
-        JTextField field5 = new JTextField(20);
+        field5 = new JTextField(20);
         field5.setEditable(false);
         gbc.gridx = 1;
         gbc.gridy = 5;
@@ -260,7 +315,7 @@ public class FlightsTab extends TabBase {
         panel.add(labelName, gbc);
 
         // Name message field
-        JTextField field6 = new JTextField(20);
+        field6 = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 6;
         panel.add(field6, gbc);
@@ -272,7 +327,7 @@ public class FlightsTab extends TabBase {
         panel.add(labelCitiz, gbc);
 
         // Citizenship message field
-        JTextField field7 = new JTextField(20);
+        field7 = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 7;
         panel.add(field7, gbc);
@@ -283,8 +338,15 @@ public class FlightsTab extends TabBase {
         gbc.gridy = 9;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        
+      //PK - add actionlisterner to JButton
+        eastPanelSouthButton.addActionListener(new reserveButtonListener());
+        //PK - add actionlisterner to JButton
+        
         panel.add(eastPanelSouthButton, gbc);
-
+        
+        
+        
         return panel;
     }
 
@@ -380,7 +442,7 @@ public class FlightsTab extends TabBase {
      */    
     private class FindFlightButtonListener implements ActionListener {
         /**
-         * The actionPerformed method executes when the user clicks on the Calculate
+         * The actionPerformed method executes when the user clicks on the "Find Flights"
          * button.
          * 
          * @param e The event object.
@@ -388,10 +450,38 @@ public class FlightsTab extends TabBase {
         
         @Override
         public void actionPerformed(ActionEvent e) {
+            flightsModel.clear();
             String from = (String) cb1.getSelectedItem();
             String to = (String) cb2.getSelectedItem();
             String weekday = (String) cb3.getSelectedItem();
             flightManager.findFlights(from, to, weekday);
+          //PK - add flight arraylist from Flight class to flightsModel variable
+            for (int i = 0; i < flightManager.resultFlights.size(); i++) {
+            
+            flightsModel.addElement(flightManager.resultFlights.get(i));
+            
+            }
+            
+           
+        }
+
+        
+    }
+    
+    /*
+     * Action to perform for the Find Flight JButton 
+     */    
+    private class reserveButtonListener implements ActionListener {
+        /**
+         * The actionPerformed method executes when the user clicks on the "Reserve"
+         * button.
+         * 
+         * @param e The event object.
+         */
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            reservationManager.makeReservation(flight, field6.getText(), field7.getText());
            
         }
 
