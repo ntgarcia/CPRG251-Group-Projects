@@ -493,7 +493,11 @@ public class FlightsTab extends TabBase {
 
             try {
                 reservationManager.makeReservation(flightsList.getSelectedValue(), field6.getText(), field7.getText());
+<<<<<<< Updated upstream
                 // reservationManager.persist();
+=======
+                reservationManager.persist();
+>>>>>>> Stashed changes
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();

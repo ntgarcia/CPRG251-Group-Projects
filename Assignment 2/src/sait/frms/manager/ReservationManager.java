@@ -140,8 +140,10 @@ public class ReservationManager extends Reservation {
 
         }
 //      }
+        
+        System.out.println("The raf length after making a reservation is " + raf.length());
         System.out.println("Binary file has been overwritten");
-        raf.close();
+//        raf.close();
     }
 
     /**
@@ -188,7 +190,7 @@ public class ReservationManager extends Reservation {
     }
 
     private void populateFromBinary() throws IOException {
-        raf = new RandomAccessFile(BINARY_FILE, "r");
+        raf = new RandomAccessFile(BINARY_FILE, MODE);
         while(raf.getFilePointer() < raf.length()) {
             raf.seek(0); //tells the program to read from the start
             String resCode = raf.readUTF().trim();
@@ -200,6 +202,7 @@ public class ReservationManager extends Reservation {
             boolean active = raf.readBoolean();
             reservations.add(new Reservation(resCode, flightCode, airline, passName, citi, cost, active));
         }
+        System.out.println(raf.length());
         System.out.println("The reservations loaded from the binary file are " + reservations);
     }
 
