@@ -13,6 +13,7 @@ public class ReservationManager extends Reservation {
     private static final String MODE = "rw";
     private static final int RESERVE_SIZE = 331;
     private ArrayList<Reservation> reservations;
+    public ArrayList<Reservation> matchReservation;
 
     /**
      * Stores the singleton instance.
@@ -63,7 +64,8 @@ public class ReservationManager extends Reservation {
         
         //have to also deduct the available seat from the flight
         
-        System.out.println(new Reservation(resCode, flightCode, airline, passName, citi, cost, active));
+        reservations.add(new Reservation(resCode, flightCode, airline, passName, citi, cost, active));
+        System.out.println("The reservations in the list are " + reservations);
         return new Reservation(resCode, flightCode, airline, passName, citi, cost, active);
         
     }
@@ -74,18 +76,24 @@ public class ReservationManager extends Reservation {
      * @param airline
      * @param name
      * @return
+     * @throws IOException 
      */
-    public ArrayList<Reservation> findReservations(String code, String airline, String name) {
-        ArrayList<Reservation> matchReservation = new ArrayList<>();
-
-        for (Reservation r : reservations) {
-            if (r.getCode().toUpperCase().equals(code) || r.getAirline().toUpperCase().equals(airline)
-                    || r.getName().toUpperCase().equals(name)) {
-                matchReservation.add(r);
+    public ArrayList<Reservation> findReservations(String code, String airline, String name) throws IOException {
+        matchReservation = new ArrayList<>();
+        System.out.println("This is from findReservation" + reservations.size());
+        
+        for (int i = 0; i<reservations.size(); i++) {
+//            for (Reservation r : reservations) {
+                if ((reservations.get(i).getCode().toUpperCase()).equals(code.toUpperCase()) || (reservations.get(i).getAirline().toUpperCase()).equals(airline.toUpperCase())
+                        || (reservations.get(i).getName().toUpperCase()).equals(name.toUpperCase())) {
+                    matchReservation.add(reservations.get(i));
+//                }
             }
+//            System.out.println(matchReservation + " findReservations method completed");
+            
         }
+        System.out.println("the matched reservation found is " + matchReservation);
         return matchReservation;
-
     }
 
     /**
@@ -104,7 +112,11 @@ public class ReservationManager extends Reservation {
     }
 
     public void persist() throws IOException { // save reservation arraylist into the bin file
+        
         for (int i = 0; i < reservations.size(); i++) {
+//            for (Reservation r : reservations) {
+            raf = new RandomAccessFile(BINARY_FILE, MODE);
+            
             String resCode = reservations.get(i).getCode();
             raf.writeUTF(resCode);
             
@@ -123,9 +135,13 @@ public class ReservationManager extends Reservation {
             double cost = reservations.get(i).getCost();
             raf.writeDouble(cost);
             
-            raf.close();
+            boolean active = reservations.get(i).isActive();
+            raf.writeBoolean(active);
 
         }
+//      }
+        System.out.println("Binary file has been overwritten");
+        raf.close();
     }
 
     /**
@@ -165,14 +181,14 @@ public class ReservationManager extends Reservation {
 
         // combine A and B to form code
         String resCode = resCodeA + rng;
-        System.out.println(resCode);
+//        System.out.println(resCode);
 
         return resCode;
 
     }
 
     private void populateFromBinary() throws IOException {
-        raf = new RandomAccessFile(BINARY_FILE, MODE);
+        raf = new RandomAccessFile(BINARY_FILE, "r");
         while(raf.getFilePointer() < raf.length()) {
             raf.seek(0); //tells the program to read from the start
             String resCode = raf.readUTF().trim();
@@ -182,7 +198,9 @@ public class ReservationManager extends Reservation {
             String citi = raf.readUTF().trim();
             double cost = raf.readDouble();
             boolean active = raf.readBoolean();
-            System.out.println(new Reservation(resCode, flightCode, airline, passName, citi, cost, active));
+            reservations.add(new Reservation(resCode, flightCode, airline, passName, citi, cost, active));
         }
+        System.out.println("The reservations loaded from the binary file are " + reservations);
     }
+
 }

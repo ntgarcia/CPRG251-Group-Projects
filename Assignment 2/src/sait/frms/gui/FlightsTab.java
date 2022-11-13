@@ -3,6 +3,8 @@ package sait.frms.gui;
 import java.awt.*;
 
 
+
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -474,6 +476,7 @@ public class FlightsTab extends TabBase {
        
             try {
                 reservationManager.makeReservation(flightsList.getSelectedValue(), field6.getText(), field7.getText());
+//                reservationManager.persist();
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();

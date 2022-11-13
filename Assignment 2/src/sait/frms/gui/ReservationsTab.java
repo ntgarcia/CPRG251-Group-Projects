@@ -1,14 +1,16 @@
 package sait.frms.gui;
 
 import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
+import java.io.IOException;
 
 import sait.frms.manager.ReservationManager;
+import sait.frms.problemdomain.Flight;
 import sait.frms.problemdomain.Reservation;
 
 /**
@@ -22,7 +24,12 @@ public class ReservationsTab extends TabBase {
 	private ReservationManager reservationManager;
 
 	private JList<Reservation> reservationsList;
-
+	
+	//PK - Added in to populate jlist
+	private DefaultListModel<Reservation> reservationsModel;
+	//PK - Added in to populate jlist
+	
+	
 	/*
 	 * PK PK - Instantiate a GridBagConstraint object for the GridBagLayout object
 	 * to call
@@ -85,9 +92,13 @@ public class ReservationsTab extends TabBase {
 		JPanel panel = new JPanel();
 
 		panel.setLayout(new BorderLayout());
+		
+		reservationsModel = new DefaultListModel<>();
 
-		reservationsList = new JList<>();
+		reservationsList = new JList<>(reservationsModel);
 
+		reservationsList.setModel(reservationsModel);
+		
 		// User can only select one item at a time.
 		reservationsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -318,7 +329,19 @@ public class ReservationsTab extends TabBase {
 		southPanelSouthButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(southPanelSouthButton, "Reservation Made.");
+				try {
+				    reservationsModel.clear();
+				    reservationManager.findReservations(fieldCode.getText(), fieldAirline.getText(), fieldName.getText());
+				    
+				    for (int i = 0; i < reservationManager.matchReservation.size(); i++) {
+				    
+//				    reservationsModel.addElement(new Reservation("code", "flightCode", "ariline", "name", "citizenship", 183.0, true));
+				    reservationsModel.addElement(reservationManager.matchReservation.get(i));
+				    }
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
 			}
 		});
 		panel.add(southPanelSouthButton, gbc);
