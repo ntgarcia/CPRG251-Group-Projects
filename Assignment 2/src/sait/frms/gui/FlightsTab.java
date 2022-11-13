@@ -2,9 +2,6 @@ package sait.frms.gui;
 
 import java.awt.*;
 
-
-
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -40,13 +37,13 @@ public class FlightsTab extends TabBase {
     private JList<Flight> flightsList;
 
     private DefaultListModel<Flight> flightsModel;
-    
+
     /*
      * PK - instance of flight
      * 
      */
     private Flight flight;
-    
+
     /*
      * PK - instance of flight
      * 
@@ -57,11 +54,11 @@ public class FlightsTab extends TabBase {
      * to call
      */
     GridBagConstraints gbc = new GridBagConstraints();
-    
+
     /*
      * Instantiate the combo-boxes at the global-level to be used in the
      * event-listener method
-     */    
+     */
     JComboBox<String> cb1;
     JComboBox<String> cb2;
     JComboBox<String> cb3;
@@ -69,7 +66,7 @@ public class FlightsTab extends TabBase {
     /*
      * Instantiate JTextField used in the east panel
      * 
-     */    
+     */
     JTextField field1;
     JTextField field2;
     JTextField field3;
@@ -134,24 +131,22 @@ public class FlightsTab extends TabBase {
      * Creates the center panel.
      * 
      * @return JPanel that goes in center.
-     * @throws FileNotFoundException 
+     * @throws FileNotFoundException
      */
     private JPanel createCenterPanel() {
-        
+
         JPanel panel = new JPanel();
 
         panel.setLayout(new BorderLayout());
 
         flightsModel = new DefaultListModel<>();
-               
+
         flightsList = new JList<>(flightsModel);
 
-        //PK - Set model for the FlightsList
+        // PK - Set model for the FlightsList
         flightsList.setModel(flightsModel);
-        //PK - Set model for the FlightsList
-        
-      
-        
+        // PK - Set model for the FlightsList
+
         // User can only select one item at a time.
         flightsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -162,39 +157,62 @@ public class FlightsTab extends TabBase {
          * selectionlistener that listens to the selection of flight from the centre
          * panel and populate the jtext
          * 
-         * fields in the east panel 
-         */        
-        
+         * fields in the east panel
+         */
+
         flightsList.addListSelectionListener(new MyListSelectionListener() {
-            
+
             @Override
-            public void valueChanged(ListSelectionEvent e ) {
+            public void valueChanged(ListSelectionEvent e) {
                 String selectedItem = String.valueOf(flightsList.getSelectedValue());
                 String[] splitItem = selectedItem.split(",");
-                
+
                 field1.setText(splitItem[0]);
-                
-                switch (splitItem[0].substring(0,2)) {
-                    case "OA": field2.setText("Otto Airlines"); break;
-                    case "CA": field2.setText("Conned Air"); break;
-                    case "TB": field2.setText("Try a Bus Airways"); break;
-                    case "VA": field2.setText("Vertical Airways"); break;
-                    case "SL": field2.setText("Scare Airlines"); break;
-                    case "AL": field2.setText("Always Late Airlines"); break;
-                    case "MA": field2.setText("Mediocre Airlines"); break;
-                    case "GA": field2.setText("Gypped Air"); break;
-                    case "EC": field2.setText("Error Canada"); break;
-                    case "AS": field2.setText("AirShaker"); break;
-                    case "ST": field2.setText("ScareTransat"); break;
-                    case "SW": field2.setText("Sprawl Airways"); break;
-                    
+
+                switch (splitItem[0].substring(0, 2)) {
+                    case "OA":
+                        field2.setText("Otto Airlines");
+                        break;
+                    case "CA":
+                        field2.setText("Conned Air");
+                        break;
+                    case "TB":
+                        field2.setText("Try a Bus Airways");
+                        break;
+                    case "VA":
+                        field2.setText("Vertical Airways");
+                        break;
+                    case "SL":
+                        field2.setText("Scare Airlines");
+                        break;
+                    case "AL":
+                        field2.setText("Always Late Airlines");
+                        break;
+                    case "MA":
+                        field2.setText("Mediocre Airlines");
+                        break;
+                    case "GA":
+                        field2.setText("Gypped Air");
+                        break;
+                    case "EC":
+                        field2.setText("Error Canada");
+                        break;
+                    case "AS":
+                        field2.setText("AirShaker");
+                        break;
+                    case "ST":
+                        field2.setText("ScareTransat");
+                        break;
+                    case "SW":
+                        field2.setText("Sprawl Airways");
+                        break;
+
                 }
-                
-                field3.setText(splitItem[3].substring(6,splitItem[3].length()));
-                field4.setText(splitItem[4].substring(7,splitItem[4].length()));
-                field5.setText(splitItem[5].substring(7,splitItem[5].length()));
-                
-                
+
+                field3.setText(splitItem[3].substring(6, splitItem[3].length()));
+                field4.setText(splitItem[4].substring(7, splitItem[4].length()));
+                field5.setText(splitItem[5].substring(7, splitItem[5].length()));
+
             }
         });
 
@@ -329,15 +347,13 @@ public class FlightsTab extends TabBase {
         gbc.gridy = 9;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        
-      //PK - add actionlisterner to JButton
+
+        // PK - add actionlisterner to JButton
         eastPanelSouthButton.addActionListener(new reserveButtonListener());
-        //PK - add actionlisterner to JButton
-        
+        // PK - add actionlisterner to JButton
+
         panel.add(eastPanelSouthButton, gbc);
-        
-        
-        
+
         return panel;
     }
 
@@ -367,7 +383,8 @@ public class FlightsTab extends TabBase {
         panel.add(labelFrom, gbc);
 
         // Content for combo-box1
-        String[] cb1Content = { "YYC", "YEG", "YUL", "YOW", "YYZ", "YVR", "YWG", "ATL", "PEK", "DXB", "HKG", "LHR", "HND", "ORD", "PVG", "CDG", "AMS", "DEL", "FRA", "DFW" };
+        String[] cb1Content = { "YYC", "YEG", "YUL", "YOW", "YYZ", "YVR", "YWG", "ATL", "PEK", "DXB", "HKG", "LHR",
+                "HND", "ORD", "PVG", "CDG", "AMS", "DEL", "FRA", "DFW" };
 
         // Combo-box1
         cb1 = new JComboBox<>(cb1Content);
@@ -385,7 +402,8 @@ public class FlightsTab extends TabBase {
         panel.add(labelTo, gbc);
 
         // Content for combo-box2
-        String[] cb2Content = { "YYC", "YEG", "YUL", "YOW", "YYZ", "YVR", "YWG", "ATL", "PEK", "DXB", "HKG", "LHR", "HND", "ORD", "PVG", "CDG", "AMS", "DEL", "FRA", "DFW" };
+        String[] cb2Content = { "YYC", "YEG", "YUL", "YOW", "YYZ", "YVR", "YWG", "ATL", "PEK", "DXB", "HKG", "LHR",
+                "HND", "ORD", "PVG", "CDG", "AMS", "DEL", "FRA", "DFW" };
 
         // Combo-box2
         cb2 = new JComboBox<>(cb2Content);
@@ -414,31 +432,31 @@ public class FlightsTab extends TabBase {
 
         // SouthPanelSouth
         JButton southPanelSouthButton = new JButton("Find Flights");
-        
-        //PK - add actionlisterner to JButton
+
+        // PK - add actionlisterner to JButton
         southPanelSouthButton.addActionListener(new FindFlightButtonListener());
-        //PK - add actionlisterner to JButton
+        // PK - add actionlisterner to JButton
         gbc.gridx = 1;
         gbc.gridy = 4;
         gbc.gridwidth = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(southPanelSouthButton, gbc);
 
-        
         return panel;
     }
 
     /*
-     * Action to perform for the Find Flight JButton 
-     */    
+     * Action to perform for the Find Flight JButton
+     */
     private class FindFlightButtonListener implements ActionListener {
         /**
-         * The actionPerformed method executes when the user clicks on the "Find Flights"
+         * The actionPerformed method executes when the user clicks on the "Find
+         * Flights"
          * button.
          * 
          * @param e The event object.
          */
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             flightsModel.clear();
@@ -446,22 +464,20 @@ public class FlightsTab extends TabBase {
             String to = (String) cb2.getSelectedItem();
             String weekday = (String) cb3.getSelectedItem();
             flightManager.findFlights(from, to, weekday);
-          //PK - add flight arraylist from Flight class to flightsModel variable
+            // PK - add flight arraylist from Flight class to flightsModel variable
             for (int i = 0; i < flightManager.resultFlights.size(); i++) {
-            
-            flightsModel.addElement(flightManager.resultFlights.get(i));
-            
+
+                flightsModel.addElement(flightManager.resultFlights.get(i));
+
             }
-            
-           
+
         }
 
-        
     }
-    
+
     /*
-     * Action to perform for the Find Flight JButton 
-     */    
+     * Action to perform for the Find Flight JButton
+     */
     private class reserveButtonListener implements ActionListener {
         /**
          * The actionPerformed method executes when the user clicks on the "Reserve"
@@ -469,28 +485,30 @@ public class FlightsTab extends TabBase {
          * 
          * @param e The event object.
          */
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            //throw exception if flight is fully booked or flight is null or the name/citizenship is null.
-       
+            // throw exception if flight is fully booked or flight is null or the
+            // name/citizenship is null.
+
             try {
                 reservationManager.makeReservation(flightsList.getSelectedValue(), field6.getText(), field7.getText());
-//                reservationManager.persist();
+                // reservationManager.persist();
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
-            
+
+            JOptionPane.showMessageDialog(null,
+                    "Reservation created. Your code is " + reservationManager.generateReservationCode(flight));
+
         }
 
-        
     }
     /*
-     * Action to perform for the Find Flight JButton 
-     */ 
-    
-    
+     * Action to perform for the Find Flight JButton
+     */
+
     private class MyListSelectionListener implements ListSelectionListener {
         /**
          * Called when user selects an item in the JList.
