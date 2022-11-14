@@ -12,8 +12,8 @@ public class ReservationManager extends Reservation {
     private static final String TEXT_FILE = "res/reserve.txt";
     private static final String MODE = "rw";
     private static final int RESERVE_SIZE = 331;
-    private ArrayList<Reservation> reservations;
-    public ArrayList<Reservation> matchReservation;
+    public ArrayList<Reservation> reservations;
+    public ArrayList<Reservation> matchReservation; 
 
     /**
      * Stores the singleton instance.

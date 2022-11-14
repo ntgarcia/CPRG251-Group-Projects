@@ -492,19 +492,20 @@ public class FlightsTab extends TabBase {
             // name/citizenship is null.
 
             try {
+                if (field6.getText().length() < 1 || field7.getText().length() < 1) {
+                  JOptionPane.showMessageDialog(null,"Name or Citizenship cannot be empty");
+                } else {
                 reservationManager.makeReservation(flightsList.getSelectedValue(), field6.getText(), field7.getText());
-<<<<<<< Updated upstream
-                // reservationManager.persist();
-=======
                 reservationManager.persist();
->>>>>>> Stashed changes
+                }
+//                JOptionPane.showMessageDialog(null,
+//                        "Reservation created. Your code is " + reservationManager.reservations)
+
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
 
-            JOptionPane.showMessageDialog(null,
-                    "Reservation created. Your code is " + reservationManager.generateReservationCode(flight));
 
         }
 
