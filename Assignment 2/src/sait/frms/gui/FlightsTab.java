@@ -492,20 +492,20 @@ public class FlightsTab extends TabBase {
             // name/citizenship is null.
 
             try {
-                reservationManager.makeReservation(flightsList.getSelectedValue(), field6.getText(), field7.getText());
-<<<<<<< Updated upstream
+                JOptionPane.showMessageDialog(null,
+                        "Reservation created. Your code is ");
+                reservationManager.makeReservation(flightsList.getSelectedValue(),
+                        field6.getText(), field7.getText());
                 // reservationManager.persist();
-=======
-                reservationManager.persist();
->>>>>>> Stashed changes
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
 
-            // generate output
-            JOptionPane.showMessageDialog(null,
-                    "Reservation created. Your code is " + reservationManager.generateReservationCode(flight));
+            // show message
+            // JOptionPane.showMessageDialog(null,
+            // "Reservation created. Your code is " +
+            // reservationManager.generateReservationCode(flight));
 
         }
 

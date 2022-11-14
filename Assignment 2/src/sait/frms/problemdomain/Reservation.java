@@ -1,5 +1,8 @@
 package sait.frms.problemdomain;
 
+// import java.math.RoundingMode;
+// import java.text.DecimalFormat;
+
 public class Reservation {
     private String code;
     private String flightCode;
@@ -8,6 +11,7 @@ public class Reservation {
     private String citizenship;
     private double cost;
     private boolean active;
+    // private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public Reservation() {
     }
@@ -121,8 +125,8 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return getCode() + ";" + getFlightCode() + ";" + getAirline() + ";" + getName() + ";" + getCitizenship() + ";"
-                + getCost();
+        return getCode() + "," + getFlightCode() + "," + getAirline() + ",$"
+                + getCost() + "," + getName() + "," + getCitizenship();
     }
 
 }
