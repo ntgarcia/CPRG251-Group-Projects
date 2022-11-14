@@ -24,17 +24,27 @@ public class ReservationsTab extends TabBase {
 	private ReservationManager reservationManager;
 
 	private JList<Reservation> reservationsList;
-	
-	//PK - Added in to populate jlist
+
+	// PK - Added in to populate jlist
 	private DefaultListModel<Reservation> reservationsModel;
-	//PK - Added in to populate jlist
-	
-	
+	// PK - Added in to populate jlist
+
 	/*
 	 * PK PK - Instantiate a GridBagConstraint object for the GridBagLayout object
 	 * to call
 	 */
 	GridBagConstraints gbc = new GridBagConstraints();
+
+	/*
+	 * Instantiate JTextField used in the east panel
+	 * 
+	 */
+	JTextField field1;
+	JTextField field2;
+	JTextField field3;
+	JTextField field4;
+	JTextField field5;
+	JTextField field6;
 
 	/**
 	 * Creates the components for reservations tab.
@@ -92,20 +102,35 @@ public class ReservationsTab extends TabBase {
 		JPanel panel = new JPanel();
 
 		panel.setLayout(new BorderLayout());
-		
+
 		reservationsModel = new DefaultListModel<>();
 
 		reservationsList = new JList<>(reservationsModel);
 
 		reservationsList.setModel(reservationsModel);
-		
+
 		// User can only select one item at a time.
 		reservationsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		// Wrap JList in JScrollPane so it is scrollable.
 		JScrollPane scrollPane = new JScrollPane(this.reservationsList);
 
-		reservationsList.addListSelectionListener(new MyListSelectionListener());
+		reservationsList.addListSelectionListener(new MyListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				String selectedItem = String.valueOf(reservationsList.getSelectedValue());
+				String[] splitItem = selectedItem.split(",");
+
+				field1.setText(splitItem[0]);
+				field2.setText(splitItem[1]);
+				field3.setText(splitItem[2]);
+				field4.setText(splitItem[3]);
+				field5.setText(splitItem[4]);
+				field6.setText(splitItem[5]);
+
+			}
+		});
 
 		panel.add(scrollPane);
 
@@ -144,69 +169,56 @@ public class ReservationsTab extends TabBase {
 		// EastPanelCentre
 
 		// Flight label
-		JLabel labelFLight = new JLabel("Flight:");
+		JLabel labelCode = new JLabel("Code:");
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		panel.add(labelFLight, gbc);
+		panel.add(labelCode, gbc);
 
 		// Flight message field
-		JTextField field1 = new JTextField(20);
+		field1 = new JTextField(20);
 		field1.setEditable(false);
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		panel.add(field1, gbc);
 
 		// Airline label
-		JLabel labelAirline = new JLabel("Airline:");
+		JLabel labelFlight = new JLabel("Flight:");
 		gbc.gridx = 0;
 		gbc.gridy = 2;
-		panel.add(labelAirline, gbc);
+		panel.add(labelFlight, gbc);
 
 		// Airline message field
-		JTextField field2 = new JTextField(20);
+		field2 = new JTextField(20);
 		field2.setEditable(false);
 		gbc.gridx = 1;
 		gbc.gridy = 2;
 		panel.add(field2, gbc);
 
 		// Day label
-		JLabel labelDay = new JLabel("Day:");
+		JLabel labelAirline = new JLabel("Airline:");
 		gbc.gridx = 0;
 		gbc.gridy = 3;
-		panel.add(labelDay, gbc);
+		panel.add(labelAirline, gbc);
 
 		// Day message field
-		JTextField field3 = new JTextField(20);
+		field3 = new JTextField(20);
 		field3.setEditable(false);
 		gbc.gridx = 1;
 		gbc.gridy = 3;
 		panel.add(field3, gbc);
 
 		// Time label
-		JLabel labelTime = new JLabel("Time:");
+		JLabel labelCost = new JLabel("Cost:");
 		gbc.gridx = 0;
 		gbc.gridy = 4;
-		panel.add(labelTime, gbc);
+		panel.add(labelCost, gbc);
 
 		// Time message field
-		JTextField field4 = new JTextField(20);
+		field4 = new JTextField(20);
 		field4.setEditable(false);
 		gbc.gridx = 1;
 		gbc.gridy = 4;
 		panel.add(field4, gbc);
-
-		// Cost label
-		JLabel labelCost = new JLabel("Cost:");
-		gbc.gridx = 0;
-		gbc.gridy = 5;
-		panel.add(labelCost, gbc);
-
-		// Cost message field
-		JTextField field5 = new JTextField(20);
-		field5.setEditable(false);
-		gbc.gridx = 1;
-		gbc.gridy = 5;
-		panel.add(field5, gbc);
 
 		// Name label
 		JLabel labelName = new JLabel("Name:");
@@ -215,10 +227,10 @@ public class ReservationsTab extends TabBase {
 		panel.add(labelName, gbc);
 
 		// Name message field
-		JTextField field6 = new JTextField(20);
+		field5 = new JTextField(20);
 		gbc.gridx = 1;
 		gbc.gridy = 6;
-		panel.add(field6, gbc);
+		panel.add(field5, gbc);
 
 		// Citizenship label
 		JLabel labelCitiz = new JLabel("Citizenship:");
@@ -227,10 +239,10 @@ public class ReservationsTab extends TabBase {
 		panel.add(labelCitiz, gbc);
 
 		// Citizenship message field
-		JTextField field7 = new JTextField(20);
+		field6 = new JTextField(20);
 		gbc.gridx = 1;
 		gbc.gridy = 7;
-		panel.add(field7, gbc);
+		panel.add(field6, gbc);
 
 		// Status label
 		JLabel labelStatus = new JLabel("Status:");
@@ -330,18 +342,20 @@ public class ReservationsTab extends TabBase {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-				    reservationsModel.clear();
-				    reservationManager.findReservations(fieldCode.getText(), fieldAirline.getText(), fieldName.getText());
-				    
-				    for (int i = 0; i < reservationManager.matchReservation.size(); i++) {
-				    
-//				    reservationsModel.addElement(new Reservation("code", "flightCode", "ariline", "name", "citizenship", 183.0, true));
-				    reservationsModel.addElement(reservationManager.matchReservation.get(i));
-				    }
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
+					reservationsModel.clear();
+					reservationManager.findReservations(fieldCode.getText(), fieldAirline.getText(),
+							fieldName.getText());
+
+					for (int i = 0; i < reservationManager.matchReservation.size(); i++) {
+
+						// reservationsModel.addElement(new Reservation("code", "flightCode", "airline",
+						// "name", "citizenship", 183.0, true));
+						reservationsModel.addElement(reservationManager.matchReservation.get(i));
+					}
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		panel.add(southPanelSouthButton, gbc);
