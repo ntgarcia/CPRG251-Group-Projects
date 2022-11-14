@@ -499,6 +499,7 @@ public class FlightsTab extends TabBase {
                 e1.printStackTrace();
             }
 
+            // generate output
             JOptionPane.showMessageDialog(null,
                     "Reservation created. Your code is " + reservationManager.generateReservationCode(flight));
 
