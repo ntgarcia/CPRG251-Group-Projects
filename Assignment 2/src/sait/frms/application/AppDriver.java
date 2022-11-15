@@ -2,11 +2,14 @@ package sait.frms.application;
 
 import sait.frms.gui.MainWindow;
 
-
 import java.io.FileNotFoundException;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import javax.swing.JOptionPane;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import sait.frms.gui.*;
 
@@ -15,7 +18,7 @@ import sait.frms.gui.*;
  * 
  */
 public class AppDriver {
- 
+
 	/**
 	 * Entry point to Java application.
 	 * 
@@ -38,7 +41,16 @@ public class AppDriver {
 			// handle exception
 		}
 
-		MainWindow mainWindow = new MainWindow();	
+		MainWindow mainWindow = new MainWindow();
+
+		mainWindow.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				JOptionPane.showMessageDialog(null, "Goodbye!");
+				System.exit(0);
+			}
+		});
+
 		mainWindow.display();
 	}
 

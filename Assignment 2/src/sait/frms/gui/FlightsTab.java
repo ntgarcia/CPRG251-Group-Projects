@@ -2,7 +2,6 @@ package sait.frms.gui;
 
 import java.awt.*;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -165,22 +164,22 @@ public class FlightsTab extends TabBase {
 
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                
-                    if (flightsList.isSelectionEmpty()) {
-                        
-                        field1.setText("");
-                        field2.setText("");
-                        field3.setText("");
-                        field4.setText("");
-                        field5.setText("");
-                        
-                    } else {
-                    
+
+                if (flightsList.isSelectionEmpty()) {
+
+                    field1.setText("");
+                    field2.setText("");
+                    field3.setText("");
+                    field4.setText("");
+                    field5.setText("");
+
+                } else {
+
                     String selectedItem = String.valueOf(flightsList.getSelectedValue());
                     String[] splitItem = selectedItem.split(",");
-    
+
                     field1.setText(splitItem[0]);
-    
+
                     switch (splitItem[0].substring(0, 2)) {
                         case "OA":
                             field2.setText("Otto Airlines");
@@ -218,13 +217,13 @@ public class FlightsTab extends TabBase {
                         case "SW":
                             field2.setText("Sprawl Airways");
                             break;
-    
+
                     }
-    
+
                     field3.setText(splitItem[3].substring(6, splitItem[3].length()));
                     field4.setText(splitItem[4].substring(7, splitItem[4].length()));
-                    field5.setText(splitItem[5].substring(7, splitItem[5].length()));
-                    }
+                    field5.setText("$" + (splitItem[5].substring(7, splitItem[5].length())));
+                }
             }
         });
 
@@ -505,22 +504,23 @@ public class FlightsTab extends TabBase {
 
             try {
                 if (field6.getText().length() < 1 || field7.getText().length() < 1) {
-                    JOptionPane.showMessageDialog(null,"Name or Citizenship cannot be empty");
+                    JOptionPane.showMessageDialog(null, "Name or Citizenship cannot be empty");
                 } else if (field1.getText().length() < 1) {
-                    JOptionPane.showMessageDialog(null,"Please select a flight from the panel first");
+                    JOptionPane.showMessageDialog(null, "Please select a flight from the panel first");
                 } else {
-                    reservationManager.makeReservation(flightsList.getSelectedValue(), field6.getText(), field7.getText());
-                    JOptionPane.showMessageDialog(null,"Your reservation code is " + reservationManager.reservations.get((reservationManager.reservations.size()-1)).getCode());
+                    reservationManager.makeReservation(flightsList.getSelectedValue(), field6.getText(),
+                            field7.getText());
+                    JOptionPane.showMessageDialog(null, "Your reservation code is " + reservationManager.reservations
+                            .get((reservationManager.reservations.size() - 1)).getCode());
                     reservationManager.persist();
                 }
-//                JOptionPane.showMessageDialog(null,
-//                        "Reservation created. Your code is " + reservationManager.reservations)
+                // JOptionPane.showMessageDialog(null,
+                // "Reservation created. Your code is " + reservationManager.reservations)
 
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
-
 
         }
 
