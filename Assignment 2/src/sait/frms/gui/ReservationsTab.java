@@ -119,16 +119,25 @@ public class ReservationsTab extends TabBase {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				String selectedItem = String.valueOf(reservationsList.getSelectedValue());
-				String[] splitItem = selectedItem.split(",");
-
-				field1.setText(splitItem[0]);
-				field2.setText(splitItem[1]);
-				field3.setText(splitItem[2]);
-				field4.setText(splitItem[3]);
-				field5.setText(splitItem[4]);
-				field6.setText(splitItem[5]);
-
+			    JOptionPane.showMessageDialog(null,"To modify the name/citizenship of a reservation, please double-click in the text-fields after making changes for the changes to take effect");
+			    if (reservationsList.isSelectionEmpty()) {
+				field1.setText("");
+				field2.setText("");
+				field3.setText("");
+				field4.setText("");
+				field5.setText("");
+				field6.setText("");
+    			} else {
+    			    String selectedItem = String.valueOf(reservationsList.getSelectedValue());
+                    String[] splitItem = selectedItem.split(",");
+    
+                    field1.setText(splitItem[0]);
+                    field2.setText(splitItem[1]);
+                    field3.setText(splitItem[2]);
+                    field4.setText(splitItem[3]);
+                    field5.setText(splitItem[4]);
+                    field6.setText(splitItem[5]);
+    			}
 			}
 		});
 
@@ -265,6 +274,37 @@ public class ReservationsTab extends TabBase {
 		gbc.gridy = 9;
 		gbc.gridwidth = 2;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
+		eastPanelSouthButton.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        
+		        String selectedItem = String.valueOf(reservationsList.getSelectedValue());
+                String[] splitItem = selectedItem.split(",");
+		        
+		        if (dropStatus.getSelectedItem().equals("Active")) {
+		            for (int i = 0; i < reservationManager.reservations.size(); i++) {
+		                if (((reservationManager.reservations.get(i).getCode().toUpperCase()).equals(splitItem[0].toUpperCase())) && (reservationManager.reservations.get(i).getName().toUpperCase()).equals(splitItem[4].toUpperCase()) && (reservationManager.reservations.get(i).getCitizenship().toUpperCase()).equals(splitItem[5].toUpperCase())) {
+		                    System.out.println(reservationManager.reservations.get(i));
+		                    reservationManager.reservations.remove(i);
+		                    reservationManager.reservations.add(new Reservation(splitItem[0],splitItem[1],splitItem[2],field5.getSelectedText(),field6.getSelectedText(),Double.parseDouble(splitItem[3].substring(1,splitItem[3].length())),Boolean.valueOf(String.valueOf(dropStatus.getSelectedItem()))));
+		                }
+		            }
+		        } else {
+		            for (int i = 0; i < reservationManager.reservations.size(); i++) {
+		                if (((reservationManager.reservations.get(i).getCode().toUpperCase()).equals(splitItem[0].toUpperCase())) && (reservationManager.reservations.get(i).getName().toUpperCase()).equals(splitItem[4].toUpperCase()) && (reservationManager.reservations.get(i).getCitizenship().toUpperCase()).equals(splitItem[5].toUpperCase())) {
+                            reservationManager.reservations.remove(i);
+                        }
+                    }
+		        }
+		        System.out.println(reservationManager.reservations);
+		        try {
+                    reservationManager.persist();
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+		    }
+		});
 
 		panel.add(eastPanelSouthButton, gbc);
 
@@ -346,11 +386,13 @@ public class ReservationsTab extends TabBase {
 					reservationManager.findReservations(fieldCode.getText(), fieldAirline.getText(),
 							fieldName.getText());
 
-					for (int i = 0; i < reservationManager.matchReservation.size(); i++) {
-
-						// reservationsModel.addElement(new Reservation("code", "flightCode", "airline",
-						// "name", "citizenship", 183.0, true));
-						reservationsModel.addElement(reservationManager.matchReservation.get(i));
+					if (reservationManager.matchReservation.isEmpty()) {
+					    JOptionPane.showMessageDialog(null,"No reservation found from your input(s)");
+					} else {
+    					for (int i = 0; i < reservationManager.matchReservation.size(); i++) {
+    
+    						reservationsModel.addElement(reservationManager.matchReservation.get(i));
+    					}
 					}
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block

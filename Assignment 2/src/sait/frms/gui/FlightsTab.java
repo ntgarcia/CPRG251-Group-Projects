@@ -2,6 +2,7 @@ package sait.frms.gui;
 
 import java.awt.*;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -164,55 +165,66 @@ public class FlightsTab extends TabBase {
 
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                String selectedItem = String.valueOf(flightsList.getSelectedValue());
-                String[] splitItem = selectedItem.split(",");
-
-                field1.setText(splitItem[0]);
-
-                switch (splitItem[0].substring(0, 2)) {
-                    case "OA":
-                        field2.setText("Otto Airlines");
-                        break;
-                    case "CA":
-                        field2.setText("Conned Air");
-                        break;
-                    case "TB":
-                        field2.setText("Try a Bus Airways");
-                        break;
-                    case "VA":
-                        field2.setText("Vertical Airways");
-                        break;
-                    case "SL":
-                        field2.setText("Scare Airlines");
-                        break;
-                    case "AL":
-                        field2.setText("Always Late Airlines");
-                        break;
-                    case "MA":
-                        field2.setText("Mediocre Airlines");
-                        break;
-                    case "GA":
-                        field2.setText("Gypped Air");
-                        break;
-                    case "EC":
-                        field2.setText("Error Canada");
-                        break;
-                    case "AS":
-                        field2.setText("AirShaker");
-                        break;
-                    case "ST":
-                        field2.setText("ScareTransat");
-                        break;
-                    case "SW":
-                        field2.setText("Sprawl Airways");
-                        break;
-
-                }
-
-                field3.setText(splitItem[3].substring(6, splitItem[3].length()));
-                field4.setText(splitItem[4].substring(7, splitItem[4].length()));
-                field5.setText(splitItem[5].substring(7, splitItem[5].length()));
-
+                
+                    if (flightsList.isSelectionEmpty()) {
+                        
+                        field1.setText("");
+                        field2.setText("");
+                        field3.setText("");
+                        field4.setText("");
+                        field5.setText("");
+                        
+                    } else {
+                    
+                    String selectedItem = String.valueOf(flightsList.getSelectedValue());
+                    String[] splitItem = selectedItem.split(",");
+    
+                    field1.setText(splitItem[0]);
+    
+                    switch (splitItem[0].substring(0, 2)) {
+                        case "OA":
+                            field2.setText("Otto Airlines");
+                            break;
+                        case "CA":
+                            field2.setText("Conned Air");
+                            break;
+                        case "TB":
+                            field2.setText("Try a Bus Airways");
+                            break;
+                        case "VA":
+                            field2.setText("Vertical Airways");
+                            break;
+                        case "SL":
+                            field2.setText("Scare Airlines");
+                            break;
+                        case "AL":
+                            field2.setText("Always Late Airlines");
+                            break;
+                        case "MA":
+                            field2.setText("Mediocre Airlines");
+                            break;
+                        case "GA":
+                            field2.setText("Gypped Air");
+                            break;
+                        case "EC":
+                            field2.setText("Error Canada");
+                            break;
+                        case "AS":
+                            field2.setText("AirShaker");
+                            break;
+                        case "ST":
+                            field2.setText("ScareTransat");
+                            break;
+                        case "SW":
+                            field2.setText("Sprawl Airways");
+                            break;
+    
+                    }
+    
+                    field3.setText(splitItem[3].substring(6, splitItem[3].length()));
+                    field4.setText(splitItem[4].substring(7, splitItem[4].length()));
+                    field5.setText(splitItem[5].substring(7, splitItem[5].length()));
+                    }
             }
         });
 

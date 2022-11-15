@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.io.*;
 import java.util.*;
 
+import sait.frms.gui.ReservationsTab;
 import sait.frms.problemdomain.Flight;
 import sait.frms.problemdomain.Reservation;
 
@@ -80,19 +81,13 @@ public class ReservationManager extends Reservation {
      */
     public ArrayList<Reservation> findReservations(String code, String airline, String name) throws IOException {
         matchReservation = new ArrayList<>();
-        System.out.println("This is from findReservation" + reservations.size());
         
         for (int i = 0; i<reservations.size(); i++) {
-//            for (Reservation r : reservations) {
                 if ((reservations.get(i).getCode().toUpperCase()).equals(code.toUpperCase()) || (reservations.get(i).getAirline().toUpperCase()).equals(airline.toUpperCase())
                         || (reservations.get(i).getName().toUpperCase()).equals(name.toUpperCase())) {
                     matchReservation.add(reservations.get(i));
-//                }
             }
-//            System.out.println(matchReservation + " findReservations method completed");
-            
         }
-        System.out.println("the matched reservation found is " + matchReservation);
         return matchReservation;
     }
 
@@ -143,7 +138,7 @@ public class ReservationManager extends Reservation {
         
         System.out.println("The raf length after making a reservation is " + raf.length());
         System.out.println("Binary file has been overwritten");
-//        raf.close();
+        raf.close();
     }
 
     /**
@@ -180,11 +175,13 @@ public class ReservationManager extends Reservation {
 
         // generate random number for flightcode
         int rng = (int)(Math.random() * (9999 - 1000 + 1) + 1000);
+        
 
         // combine A and B to form code
         String resCode = resCodeA + rng;
-//        System.out.println(resCode);
-
+        
+        System.out.println("Your reservation code is " + resCode);
+        
         return resCode;
 
     }
