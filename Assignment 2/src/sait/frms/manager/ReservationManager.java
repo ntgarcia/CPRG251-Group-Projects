@@ -14,7 +14,8 @@ public class ReservationManager extends Reservation {
     private static final String MODE = "rw";
     private static final int RESERVE_SIZE = 331;
     public ArrayList<Reservation> reservations;
-    public ArrayList<Reservation> matchReservation; 
+    public ArrayList<Reservation> matchReservation;
+    public String resCode = "";
 
     /**
      * Stores the singleton instance.

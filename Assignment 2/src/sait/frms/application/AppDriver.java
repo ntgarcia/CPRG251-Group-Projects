@@ -2,6 +2,7 @@ package sait.frms.application;
 
 import sait.frms.gui.MainWindow;
 
+
 import java.io.FileNotFoundException;
 
 import javax.swing.UIManager;
@@ -14,7 +15,7 @@ import sait.frms.gui.*;
  * 
  */
 public class AppDriver {
-
+ 
 	/**
 	 * Entry point to Java application.
 	 * 
@@ -37,7 +38,7 @@ public class AppDriver {
 			// handle exception
 		}
 
-		MainWindow mainWindow = new MainWindow();
+		MainWindow mainWindow = new MainWindow();	
 		mainWindow.display();
 	}
 

@@ -505,10 +505,13 @@ public class FlightsTab extends TabBase {
 
             try {
                 if (field6.getText().length() < 1 || field7.getText().length() < 1) {
-                  JOptionPane.showMessageDialog(null,"Name or Citizenship cannot be empty");
+                    JOptionPane.showMessageDialog(null,"Name or Citizenship cannot be empty");
+                } else if (field1.getText().length() < 1) {
+                    JOptionPane.showMessageDialog(null,"Please select a flight from the panel first");
                 } else {
-                reservationManager.makeReservation(flightsList.getSelectedValue(), field6.getText(), field7.getText());
-                reservationManager.persist();
+                    reservationManager.makeReservation(flightsList.getSelectedValue(), field6.getText(), field7.getText());
+                    JOptionPane.showMessageDialog(null,"Your reservation code is " + reservationManager.reservations.get((reservationManager.reservations.size()-1)).getCode());
+                    reservationManager.persist();
                 }
 //                JOptionPane.showMessageDialog(null,
 //                        "Reservation created. Your code is " + reservationManager.reservations)
