@@ -1,7 +1,6 @@
 package sait.frms.application;
 
 import sait.frms.gui.MainWindow;
-import sait.frms.manager.ReservationManager;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -26,7 +25,6 @@ public class AppDriver {
 	 * @param args
 	 * @throws FileNotFoundException
 	 */
-    private ReservationManager reservationManager;
 	public static void main(String[] args) throws FileNotFoundException {
 		try {
 			// Set System L&F
@@ -44,17 +42,10 @@ public class AppDriver {
 		}
 
 		MainWindow mainWindow = new MainWindow();
-		ReservationManager reservationManager = new ReservationManager();
 		
 		mainWindow.addWindowListener(new WindowAdapter() {
 		    @Override
 		      public void windowClosing(WindowEvent we) {
-		        try {
-                    reservationManager.persist();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
 		        JOptionPane.showMessageDialog(null,"Thank you for using our service");
 		        System.exit(0);
 		      }

@@ -12,7 +12,6 @@ public class ReservationManager extends Reservation {
     private static final String BINARY_FILE = "res/reserve.bin";
     private static final String TEXT_FILE = "res/reserve.txt";
     private static final String MODE = "rw";
-    private static final int RESERVE_SIZE = 331;
     public ArrayList<Reservation> reservations;
     public ArrayList<Reservation> matchReservation;
     public String resCode = "";
@@ -30,11 +29,6 @@ public class ReservationManager extends Reservation {
     public ReservationManager() throws FileNotFoundException {
         super();
         this.raf = new RandomAccessFile(BINARY_FILE, MODE);
-        
-     // If length is 0, load from text file
-//        if (this.raf.length() == 0) {
-//            this.loadFromText(); // either populatefrombinary or from a text file
-//        }
         
         reservations = new ArrayList<>();
         try {
@@ -109,7 +103,8 @@ public class ReservationManager extends Reservation {
 
     public void persist() throws IOException { // save reservation arraylist into the bin file
         
-        for (int i = 0; i < reservations.size(); i++) {
+        for (int i = 0; i < reservations.size(); i++) { 
+            
             raf = new RandomAccessFile(BINARY_FILE, MODE);
             
             String resCode = reservations.get(i).getCode();

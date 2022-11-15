@@ -510,6 +510,7 @@ public class FlightsTab extends TabBase {
                     JOptionPane.showMessageDialog(null,"Please select a flight from the panel first");
                 } else {
                     reservationManager.makeReservation(flightsList.getSelectedValue(), field6.getText(), field7.getText());
+                    reservationManager.persist();
                     JOptionPane.showMessageDialog(null,"Your reservation code is " + reservationManager.reservations.get((reservationManager.reservations.size()-1)).getCode());
                 }
 
