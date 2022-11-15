@@ -297,12 +297,6 @@ public class ReservationsTab extends TabBase {
                     }
 		        }
 		        System.out.println(reservationManager.reservations);
-		        try {
-                    reservationManager.persist();
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
 		    }
 		});
 

@@ -22,57 +22,6 @@ public class MainWindow extends JFrame {
 
 	private static final String TAB_FLIGHTS = "flights";
 	private static final String TAB_RESERVATIONS = "reservations";
-//
-//	// PK - abstract methods from the WindowListener interface
-//	@Override
-//    public void windowActivated(WindowEvent e) {
-//        // TODO Auto-generated method stub
-//	    System.out.println();
-//    }
-//
-//    @Override
-//    public void windowClosed(WindowEvent e) {
-//        try {
-//            reservationManager.persist();
-//            JOptionPane.showMessageDialog(null,"The persist method is invoked");
-//            System.exit(0);
-//        } catch (IOException e1) {
-//            // TODO Auto-generated catch block
-//            e1.printStackTrace();
-//        }
-//    }
-//
-//    @Override
-//    public void windowClosing(WindowEvent e) {
-//        // TODO Auto-generated method stub
-//        System.out.println();
-//    }
-//
-//    @Override
-//    public void windowDeactivated(WindowEvent e) {
-//        // TODO Auto-generated method stub
-//        System.out.println();
-//    }
-//
-//    @Override
-//    public void windowDeiconified(WindowEvent e) {
-//        // TODO Auto-generated method stub
-//        System.out.println();
-//    }
-//
-//    @Override
-//    public void windowIconified(WindowEvent e) {
-//        // TODO Auto-generated method stub
-//        System.out.println();
-//    }
-//
-//    @Override
-//    public void windowOpened(WindowEvent e) {
-//        // TODO Auto-generated method stub
-//        System.out.println();
-//    }
-
-    // PK - abstract methods from the WindowListener interface
     
     /**
 	 * Holds the flight manager.

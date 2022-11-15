@@ -110,7 +110,6 @@ public class ReservationManager extends Reservation {
     public void persist() throws IOException { // save reservation arraylist into the bin file
         
         for (int i = 0; i < reservations.size(); i++) {
-//            for (Reservation r : reservations) {
             raf = new RandomAccessFile(BINARY_FILE, MODE);
             
             String resCode = reservations.get(i).getCode();
@@ -133,13 +132,10 @@ public class ReservationManager extends Reservation {
             
             boolean active = reservations.get(i).isActive();
             raf.writeBoolean(active);
-
         }
-//      }
-        
         System.out.println("The raf length after making a reservation is " + raf.length());
         System.out.println("Binary file has been overwritten");
-        raf.close();
+     
     }
 
     /**

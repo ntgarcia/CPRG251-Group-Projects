@@ -511,7 +511,6 @@ public class FlightsTab extends TabBase {
                 } else {
                     reservationManager.makeReservation(flightsList.getSelectedValue(), field6.getText(), field7.getText());
                     JOptionPane.showMessageDialog(null,"Your reservation code is " + reservationManager.reservations.get((reservationManager.reservations.size()-1)).getCode());
-                    reservationManager.persist();
                 }
 //                JOptionPane.showMessageDialog(null,
 //                        "Reservation created. Your code is " + reservationManager.reservations)
