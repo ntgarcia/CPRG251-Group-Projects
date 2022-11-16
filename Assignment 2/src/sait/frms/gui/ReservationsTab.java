@@ -289,34 +289,22 @@ public class ReservationsTab extends TabBase {
     		                if (((reservationManager.reservations.get(i).getCode().toUpperCase()).equals(splitItem[0].toUpperCase())) && (reservationManager.reservations.get(i).getName().toUpperCase()).equals(splitItem[4].toUpperCase()) && (reservationManager.reservations.get(i).getCitizenship().toUpperCase()).equals(splitItem[5].toUpperCase())) {
     		                    reservationManager.reservations.remove(i);
     		                    reservationManager.reservations.add(new Reservation(splitItem[0],splitItem[1],splitItem[2],field5.getSelectedText(),field6.getSelectedText(),Double.parseDouble(splitItem[3].substring(1,splitItem[3].length())),Boolean.valueOf(String.valueOf(dropStatus.getSelectedItem()))));
-    		                    try {
-    		                        reservationManager.persist();
-    		                    } catch (IOException e1) {
-    		                        // TODO Auto-generated catch block
-    		                        e1.printStackTrace();
-    		                    }
     		                }
     		            }
     		        } else {
     		            for (int i = 0; i < reservationManager.reservations.size(); i++) {
     		                if (((reservationManager.reservations.get(i).getCode().toUpperCase()).equals(splitItem[0].toUpperCase())) && (reservationManager.reservations.get(i).getName().toUpperCase()).equals(splitItem[4].toUpperCase()) && (reservationManager.reservations.get(i).getCitizenship().toUpperCase()).equals(splitItem[5].toUpperCase())) {
                                 reservationManager.reservations.remove(i);
-                                try {
-                                    reservationManager.persist();
-                                } catch (IOException e1) {
-                                    // TODO Auto-generated catch block
-                                    e1.printStackTrace();
-                                }
                             }
                         }
     		        }
                 }
-//		        try {
-//                    reservationManager.persist();
-//                } catch (IOException e1) {
-//                    // TODO Auto-generated catch block
-//                    e1.printStackTrace();
-//                }
+		        try {
+                    reservationManager.persist();
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
 		        System.out.println(reservationManager.reservations);
 		    }
 		});
