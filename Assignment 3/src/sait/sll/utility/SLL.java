@@ -20,6 +20,8 @@ public class SLL implements LinkedListADT  {
 	@Override
 	public void clear() {
 		// Clear all items in the linked list.
+		 head=tail=null;
+			size=0;
 		
 	}
 
@@ -74,13 +76,27 @@ public class SLL implements LinkedListADT  {
 	@Override
 	public void replace(Object data, int index) throws IndexOutOfBoundsException {
 		// Replace an item in the linked list.
-		
+		if(index <0 || index >size) {
+			throw new IndexOutOfBoundsException();
+		}
+		// Set current node to head
+				SLLNode currentNode = head;
+				int currentIndex = 0;
+
+				while (currentNode != null && currentIndex < index) {
+					currentIndex++;
+					currentNode = currentNode.getNext();
+				}
+
+				currentNode.setData(data);
+			}
+
 	}
 
 	@Override
 	public int size() {
 		// Get the number of items in the linked list.
-		return 0;
+		return size;
 	}
 
 	@Override
@@ -95,19 +111,44 @@ public class SLL implements LinkedListADT  {
 	@Override
 	public Object retrieve(int index) throws IndexOutOfBoundsException {
 		// Get an item at an index in the linked list.
-		return null;
+		if(index < 0 || index > size) {
+			throw new IndexOutOfBoundsException();
+			SLLNode currentNode = head;
+
+			// Loop until we reach to the node at index or node that is null.
+			for (int currentIndex = 0; currentIndex < index && currentNode != null; currentIndex++) {
+				currentNode = currentNode.getNext();
+			}
+
+			return currentNode.getData();
+		}
 	}
 
 	@Override
 	public int indexOf(Object data) {
-		// Get the index of an item in the linked list.
-		return 0;
+		// GSLLNode current = head;
+		int index = 0;
+		SLLNode currentNode = head;
+
+		while (currentNode != null) {
+			// If current node value contains matching object -> return the index.
+			if (currentNode.getData().equals(data))
+				return index;
+
+			index++;
+			currentNode = currentNode.getNext();
+		}
+
+		// If we looped through all the nodes, nothing was found, so return -1.
+		return -1;
 	}
 
 	@Override
 	public boolean contains(Object data) {
 		// Check if linked list has an item.
-		return false;
+		int index = indexOf(data);
+		return index >= 0 ? true : false;
+
 	}
 	
 	class SLLNode {
