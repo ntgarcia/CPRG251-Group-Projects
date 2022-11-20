@@ -102,9 +102,7 @@ public class SLL implements LinkedListADT  {
 	@Override
 	public void delete(int index) throws IndexOutOfBoundsException {
 		// Remove an item at an index in the linked list.
-		if(index < 0 || index >= size) {
-			throw new IndexOutOfBoundsException();
-		}
+		
 		
 	}
 
