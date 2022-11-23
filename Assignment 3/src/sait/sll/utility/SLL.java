@@ -5,11 +5,7 @@ public class SLL implements LinkedListADT  {
 	private SLLNode head;
 	private SLLNode tail;
 	private int size;
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
+	  
 
 	@Override
 	public boolean isEmpty() {
@@ -102,9 +98,48 @@ public class SLL implements LinkedListADT  {
 	@Override
 	public void delete(int index) throws IndexOutOfBoundsException {
 		// Remove an item at an index in the linked list.
+		// Throw IndexOutOfBoundsException if index is negative or index is greater than
+				// the size - 1.
+				if (index < 0 || index > size() - 1)
+					throw new IndexOutOfBoundsException();
+
+				Node prevNode = head;
+				int currentIndex = 0;
+				SLLNode nodeToDelete;
+
+				// If index to delete from is 0
+				if (index == 0) {
+					// Get the existing node at head.
+					nodeToDelete = head;
+
+					// Set head to node after head
+					this.head = head.getNext();
+
+					// Set node next of head to null.
+					nodeToDelete.setNext(null);
+				} else {
+					// Otherwise, loop until we reach to node at index - 1.
+					while (prevNode != null && currentIndex < index - 1) {
+						prevNode = prevNode.getNext();
+						currentIndex++;
+					}
+					// prevNode is before the one to delete.
+					// nodeToDelete is the node being deleted.
+					nodeToDelete = prevNode.getNext();
+
+					// Set next of prevNode to node after the next one (at index + 1)
+					prevNode.setNext(nodeToDelete.getNext());
+
+					// Set next of nodeToDelete to null.
+					nodeToDelete.setNext(null);
+				}
+
+				// Decrement the size
+				size--;
+			}
+
 		
-		
-	}
+	
 
 	@Override
 	public Object retrieve(int index) throws IndexOutOfBoundsException {
