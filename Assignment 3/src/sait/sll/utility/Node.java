@@ -1,6 +1,12 @@
 package sait.sll.utility;
 
-public class Node {
+import java.io.Serializable;
+
+public class Node implements Serializable {
+ /**
+	 * 
+	 */
+ private static final long serialVersionUID = -5797058805432794419L;
  Object data;
  Node next;
  

@@ -1,54 +1,18 @@
 package sait.sll.utility;
 
 import java.io.*;
-import java.util.ArrayList;
 
-import sait.sll.problemdomain.User;
+public class SLL implements LinkedListADT, Serializable  {
 
-public class SLL implements LinkedListADT  {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 775642735338034468L;
 	private Node head;
 	private Node tail;
 	private int size;
 	
 	public static void main(String[] args) {
-		//Write list (Serialization)
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream (new ByteArrayOutputStream());
-			ArrayList<User> list = new ArrayList<User>();
-//			for (int i = 1; i < 5; i++) {
-//				list.add(new User(i, "Logan", "Logan@sait.ca", "password " + i));
-//			}
-			
-			out.writeObject(list);
-			out.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		//Read list (Deserialization)
-		try {
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream("res/userlist.ser"));
-			ArrayList<User> list = (ArrayList<User>)in.readObject();
-			for(int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i));
-			}
-			in.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
 
 	@Override
@@ -181,8 +145,6 @@ public class SLL implements LinkedListADT  {
 			}
 
 		
-	
-
 	@Override
 	public Object retrieve(int index) throws IndexOutOfBoundsException {
 		// Get an item at an index in the linked list.
