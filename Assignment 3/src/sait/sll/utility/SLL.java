@@ -1,11 +1,55 @@
 package sait.sll.utility;
 
+import java.io.*;
+import java.util.ArrayList;
+
+import sait.sll.problemdomain.User;
+
 public class SLL implements LinkedListADT  {
 
-	private SLLNode head;
-	private SLLNode tail;
+	private Node head;
+	private Node tail;
 	private int size;
-	  
+	
+	public static void main(String[] args) {
+		//Write list (Serialization)
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream (new ByteArrayOutputStream());
+			ArrayList<User> list = new ArrayList<User>();
+//			for (int i = 1; i < 5; i++) {
+//				list.add(new User(i, "Logan", "Logan@sait.ca", "password " + i));
+//			}
+			
+			out.writeObject(list);
+			out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Read list (Deserialization)
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream("res/userlist.ser"));
+			ArrayList<User> list = (ArrayList<User>)in.readObject();
+			for(int i = 0; i < list.size(); i++) {
+				System.out.println(list.get(i));
+			}
+			in.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 
 	@Override
 	public boolean isEmpty() {
@@ -24,7 +68,7 @@ public class SLL implements LinkedListADT  {
 	@Override
 	public void append(Object data) {
 		// Append an item to the end of the linked list.
-		SLLNode newNode = new SLLNode(data);
+		Node newNode = new Node(data);
 		if(head == null) {
 			tail = head = newNode;
 		} else {
@@ -40,7 +84,7 @@ public class SLL implements LinkedListADT  {
 		if(head == null) {
 			append(data);
 		} else {
-			SLLNode newNode = new SLLNode(data);
+			Node newNode = new Node(data);
 			newNode.next = head;
 			head = newNode;
 			size++;
@@ -58,12 +102,12 @@ public class SLL implements LinkedListADT  {
 		} else if (index >= size) {
 			append(data);
 		} else {
-			SLLNode current = head;
+			Node current = head;
 			for (int i = 1; i < index; i++) {
 				current = current.next;
 			}
-			SLLNode temp = current.next;
-			current.next = new SLLNode(data);
+			Node temp = current.next;
+			current.next = new Node(data);
 			(current.next) .next = temp;
 			size++;
 		}
@@ -76,17 +120,15 @@ public class SLL implements LinkedListADT  {
 			throw new IndexOutOfBoundsException();
 		}
 		// Set current node to head
-				SLLNode currentNode = head;
-				int currentIndex = 0;
+		Node currentNode = head;
+		int currentIndex = 0;
 
-				while (currentNode != null && currentIndex < index) {
-					currentIndex++;
-					currentNode = currentNode.getNext();
-				}
+		while (currentNode != null && currentIndex < index) {
+			currentIndex++;
+			currentNode = currentNode.getNext();
+		}
 
-				currentNode.setData(data);
-			}
-
+		currentNode.setData(data);
 	}
 
 	@Override
@@ -105,7 +147,7 @@ public class SLL implements LinkedListADT  {
 
 				Node prevNode = head;
 				int currentIndex = 0;
-				SLLNode nodeToDelete;
+				Node nodeToDelete;
 
 				// If index to delete from is 0
 				if (index == 0) {
@@ -146,22 +188,22 @@ public class SLL implements LinkedListADT  {
 		// Get an item at an index in the linked list.
 		if(index < 0 || index > size) {
 			throw new IndexOutOfBoundsException();
-			SLLNode currentNode = head;
-
-			// Loop until we reach to the node at index or node that is null.
-			for (int currentIndex = 0; currentIndex < index && currentNode != null; currentIndex++) {
-				currentNode = currentNode.getNext();
-			}
-
-			return currentNode.getData();
 		}
+		
+		Node currentNode = head;
+		// Loop until we reach to the node at index or node that is null.
+		for (int currentIndex = 0; currentIndex < index && currentNode != null; currentIndex++) {
+			currentNode = currentNode.getNext();
+		}
+
+		return currentNode.getData();
 	}
 
 	@Override
 	public int indexOf(Object data) {
 		// GSLLNode current = head;
 		int index = 0;
-		SLLNode currentNode = head;
+		Node currentNode = head;
 
 		while (currentNode != null) {
 			// If current node value contains matching object -> return the index.
@@ -183,19 +225,4 @@ public class SLL implements LinkedListADT  {
 		return index >= 0 ? true : false;
 
 	}
-	
-	class SLLNode {
-		Object data;
-		SLLNode next;
-		
-		public SLLNode(Object data, SLLNode next) {
-			this.data = data;
-			this.next = next;
-		}
-		
-		public SLLNode(Object data) {
-			this.data = data;
-		}
-	}
-
 }

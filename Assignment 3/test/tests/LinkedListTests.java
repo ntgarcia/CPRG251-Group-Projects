@@ -41,8 +41,21 @@ class LinkedListTests {
 	 */
 	@Test
 	void testIsEmpty() {
-		assertTrue(this.linkedList.isEmpty());
+//		assertTrue(this.linkedList.isEmpty());
 		assertEquals(0, this.linkedList.size());
+	}
+	
+	/**
+	 * Test a non-empty linked list is empty.
+	 */
+	@Test
+	void testIsEmptyNotEmpty() {
+		linkedList.append("A");
+		linkedList.append("B");
+		linkedList.append("C");
+		assertFalse(this.linkedList.isEmpty());
+//		assertEquals(0, this.linkedList.size()); PK - to be deleted
+		// PK - need to add a test for when the link is not empty
 	}
 	
 	/**
@@ -250,5 +263,52 @@ class LinkedListTests {
 		
 		String value = (String) this.linkedList.retrieve(1);
 		assertEquals("b", value);
+	}
+	
+	@Test
+	void testSize() {
+		assertEquals(0, this.linkedList.size());
+		
+		this.linkedList.append("a");
+		this.linkedList.append("b");
+		this.linkedList.append("c");
+		this.linkedList.append("d");
+		
+		// Test the size is 4
+		assertEquals(4, this.linkedList.size());
+	}
+	
+	@Test
+	void testClear() {
+		this.linkedList.append("a");
+		this.linkedList.append("b");
+		this.linkedList.append("c");
+		this.linkedList.append("d");
+		
+		this.linkedList.clear();
+		
+		assertEquals(0, this.linkedList.size());
+	}
+	
+	@Test
+	void testIndexOf() {
+		this.linkedList.append("a");
+		this.linkedList.append("b");
+		this.linkedList.append("c");
+		this.linkedList.append("d");
+		
+		assertEquals(1, this.linkedList.indexOf("b"));
+		assertEquals(3, this.linkedList.indexOf("d"));
+	}
+	
+	@Test
+	void testContains() {
+		this.linkedList.append("a");
+		this.linkedList.append("b");
+		this.linkedList.append("c");
+		this.linkedList.append("d");
+		
+		boolean contains = this.linkedList.contains("b");
+		assertTrue(contains);
 	}
 }
