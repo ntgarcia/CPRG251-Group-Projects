@@ -136,19 +136,23 @@ class LinkedListTests {
 	 * Tests inserting node at valid index.
 	 */
 	@Test
-	void testInsertNode() {
+	void testInsertNodeOutofBound() {
 		this.linkedList.append("a");
 		this.linkedList.append("b");
 		this.linkedList.append("c");
 		this.linkedList.append("d");
 		
 		this.linkedList.insert("e", 2);
+		//If the index < 0 || index > size, throws IndexOutOfoundsException
+				assertThrows(IndexOutOfBoundsException.class, () -> this.linkedList.insert("e", -1));
+				assertThrows(IndexOutOfBoundsException.class, () -> this.linkedList.insert("e", 5));
 		
 		/**
 		 * Linked list should now be:
 		 * 
 		 * a -> b -> e -> c -> d
 		 */
+	
 		
 		// Test the linked list is not empty.
 		assertFalse(this.linkedList.isEmpty());
@@ -180,7 +184,7 @@ class LinkedListTests {
 	 * Tests replacing existing nodes data.
 	 */
 	@Test
-	void testReplaceNode() {
+	void testReplaceNodeOutOfBound() {
 		this.linkedList.append("a");
 		this.linkedList.append("b");
 		this.linkedList.append("c");
@@ -188,6 +192,9 @@ class LinkedListTests {
 		
 		this.linkedList.replace("e", 2);
 		
+		//If the index < 0 || index > size, throws IndexOutOfoundsException
+				assertThrows(IndexOutOfBoundsException.class, () -> this.linkedList.replace("e", -1));
+				assertThrows(IndexOutOfBoundsException.class, () -> this.linkedList.replace("e", 5));
 		/**
 		 * Linked list should now be:
 		 * 
@@ -221,13 +228,17 @@ class LinkedListTests {
 	 * Tests deleting node from linked list.
 	 */
 	@Test
-	void testDeleteNode() {//**
+	void testDeleteNodeOutOfBound() {//**
 		this.linkedList.append("a");
 		this.linkedList.append("b");
 		this.linkedList.append("c");
 		this.linkedList.append("d");
 		
 		this.linkedList.delete(2);
+		
+		//If the index < 0 || index > size, throws IndexOutOfoundsException
+				assertThrows(IndexOutOfBoundsException.class, () -> this.linkedList.delete( -1));
+				assertThrows(IndexOutOfBoundsException.class, () -> this.linkedList.delete( 5));
 		
 		/**
 		 * Linked list should now be:
@@ -257,7 +268,7 @@ class LinkedListTests {
 	 * Tests finding and retrieving node in linked list.
 	 */
 	@Test
-	void testFindNode() {
+	void testFindNodeOutOfBound() {
 		this.linkedList.append("a");
 		this.linkedList.append("b");
 		this.linkedList.append("c");
