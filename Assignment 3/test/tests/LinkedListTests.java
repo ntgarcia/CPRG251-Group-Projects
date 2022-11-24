@@ -145,7 +145,7 @@ class LinkedListTests {
 		this.linkedList.insert("e", 2);
 		//If the index < 0 || index > size, throws IndexOutOfoundsException
 				assertThrows(IndexOutOfBoundsException.class, () -> this.linkedList.insert("e", -1));
-				assertThrows(IndexOutOfBoundsException.class, () -> this.linkedList.insert("e", 5));
+				assertThrows(IndexOutOfBoundsException.class, () -> this.linkedList.insert("e", 6));
 		
 		/**
 		 * Linked list should now be:
