@@ -41,8 +41,12 @@ class LinkedListTests {
 	 */
 	@Test
 	void testIsEmpty() {
-//		assertTrue(this.linkedList.isEmpty());
+		assertTrue(this.linkedList.isEmpty());
 		assertEquals(0, this.linkedList.size());
+		assertNotEquals(1, this.linkedList.size());
+		
+		linkedList.append("A");
+		assertFalse(this.linkedList.isEmpty());
 	}
 	
 	/**
@@ -149,6 +153,8 @@ class LinkedListTests {
 		// Test the linked list is not empty.
 		assertFalse(this.linkedList.isEmpty());
 		
+		assertNotEquals(6, this.linkedList.size());
+		
 		// Test the size is 4
 		assertEquals(5, this.linkedList.size());
 
@@ -166,6 +172,8 @@ class LinkedListTests {
 		
 		// Test the fourth node value is d
 		assertEquals("d", this.linkedList.retrieve(4));
+		
+		assertNotEquals("z", this.linkedList.retrieve(4));
 	}
 	
 	/**
@@ -203,13 +211,17 @@ class LinkedListTests {
 		
 		// Test the fourth node value is d
 		assertEquals("d", this.linkedList.retrieve(3));
+		
+		assertFalse(this.linkedList.contains("c"));
+		assertTrue(this.linkedList.contains("e"));
+		assertNotEquals("c", this.linkedList.retrieve(2));
 	}
 	
 	/**
 	 * Tests deleting node from linked list.
 	 */
 	@Test
-	void testDeleteNode() {
+	void testDeleteNode() {//**
 		this.linkedList.append("a");
 		this.linkedList.append("b");
 		this.linkedList.append("c");
@@ -237,6 +249,8 @@ class LinkedListTests {
 		
 		// Test the fourth node value is d
 		assertEquals("d", this.linkedList.retrieve(2));
+		
+		assertFalse(this.linkedList.contains("c"));
 	}
 	
 	/**
@@ -263,11 +277,14 @@ class LinkedListTests {
 		
 		String value = (String) this.linkedList.retrieve(1);
 		assertEquals("b", value);
+		
+		assertFalse(this.linkedList.contains("z"));
 	}
 	
 	@Test
 	void testSize() {
 		assertEquals(0, this.linkedList.size());
+		assertTrue(this.linkedList.isEmpty());
 		
 		this.linkedList.append("a");
 		this.linkedList.append("b");
@@ -288,6 +305,8 @@ class LinkedListTests {
 		this.linkedList.clear();
 		
 		assertEquals(0, this.linkedList.size());
+		assertFalse(this.linkedList.contains("a"));
+		assertTrue(this.linkedList.isEmpty());
 	}
 	
 	@Test
@@ -299,6 +318,7 @@ class LinkedListTests {
 		
 		assertEquals(1, this.linkedList.indexOf("b"));
 		assertEquals(3, this.linkedList.indexOf("d"));
+		assertNotEquals(3, this.linkedList.indexOf("z"));
 	}
 	
 	@Test
@@ -310,5 +330,11 @@ class LinkedListTests {
 		
 		boolean contains = this.linkedList.contains("b");
 		assertTrue(contains);
+		assertFalse(this.linkedList.contains("z"));
+		
+		this.linkedList.append(null);
+		
+		assertNull(this.linkedList.retrieve(4));
+		assertNotNull(this.linkedList.retrieve(1));
 	}
 }

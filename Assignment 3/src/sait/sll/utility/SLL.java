@@ -18,7 +18,11 @@ public class SLL implements LinkedListADT, Serializable  {
 	@Override
 	public boolean isEmpty() {
 		// Checks if the list is empty.
-		return false;
+		if (tail == null && head == null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
