@@ -1,9 +1,12 @@
 package sait.mms.appplication;
 
+import sait.mms.managers.MovieManagementSystem;
+
 public class appDriver {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		new MovieManagementSystem();
 
 	}
 
