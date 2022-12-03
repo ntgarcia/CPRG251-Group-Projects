@@ -23,12 +23,6 @@ public class MariaDBDriver implements DatabaseDriver {
 	Connection conn;
 	
 	public MariaDBDriver() {
-		try {
-			connect();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	@Override
@@ -46,6 +40,8 @@ public class MariaDBDriver implements DatabaseDriver {
 
 	@Override
 	public ResultSet get(String query) throws SQLException {
+		int durationSum = 0;
+		connect();
 		
 		// Create a Statement object.
 		Statement stmt = conn.createStatement();
@@ -53,11 +49,27 @@ public class MariaDBDriver implements DatabaseDriver {
 		// Send the statement to the DBMS.
 		ResultSet result = stmt.executeQuery(query);
 		
+		// Display the contents of the result set.
+		
+		System.out.println("");
+		System.out.println("Movie List");
+		System.out.println("Duration    Year  Title");
+		while (result.next()) {
+			durationSum += result.getInt("Duration");
+			System.out.printf("%-11d %-5s %s\n",
+			result.getInt("Duration"),
+			(result.getString("Year")).substring(0, 4),
+			result.getString("Title"));
+		}
+		System.out.println("");
+		System.out.println("Total duration: " + durationSum + " minutes\n");
+		
 		return result;
 	}
 
 	@Override
 	public int update(String query) throws SQLException {
+		connect();
 		
 		// Create a Statement object.
 		Statement stmt = conn.createStatement();
