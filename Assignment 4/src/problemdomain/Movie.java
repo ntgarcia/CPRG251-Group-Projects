@@ -1,4 +1,4 @@
-package sait.mms.problemdomain;
+package problemdomain;
 
 public class Movie {
 	
