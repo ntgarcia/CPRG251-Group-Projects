@@ -1,6 +1,5 @@
 package sait.mms.managers;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -43,6 +42,9 @@ public class MovieManagementSystem {
 				System.out.println("\r\nGoodbye!\r\n");
 				System.exit(0);
 				break;
+			default:
+				System.out.println("\r\nThat option does not exist! Please select from the available options.\r\n");
+				displayMenu();
 		}
 	}
 
@@ -72,22 +74,23 @@ public class MovieManagementSystem {
 	}
 
 	private void printMoviesInYear() {
-		System.out.println("Enter Movie Year");
+		System.out.print("\r\nEnter Movie Year: ");
 		int year = in.nextInt();
 		
 		String queryString = "Select * from movies where year =" +year;
 		
-		ResultSet rs = DatabaseDriver.get(queryString);
-		
-		System.out.printf("%15s %5s %10s\n" , "Duration", "Year" ,"Title");
-		while(rs.next()) {
-			System.out.printf("%10d %10d %10s\n" , rs.getInt("duration"), rs.getInt("year"), rs.getString("Title"));
+		try {
+			driver.get(queryString);
+			driver.disconnect();
+			displayMenu();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		rs.close();
 	}
 	
 	private void printRandomMovies() {
-		System.out.print("Enter number of movies: ");
+		System.out.print("\r\nEnter number of movies: ");
 		int numMovies = in.nextInt();
 
 		String query = "SELECT Duration, Year, Title "
